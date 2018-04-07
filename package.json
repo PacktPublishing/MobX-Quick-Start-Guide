@@ -1,0 +1,22 @@
+{
+    "name": "mobx-quickstart",
+    "version": "1.0.0",
+    "description": "",
+    "keywords": [],
+    "homepage": "https://codesandbox.io/s/new",
+    "main": "src/index.js",
+    "dependencies": {
+        "custom-react-scripts": "^0.2.2",
+        "mobx": "4.1.1",
+        "mobx-react": "5.0.0",
+        "react": "16.2.0",
+        "react-dom": "16.2.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject"
+    }
+}
