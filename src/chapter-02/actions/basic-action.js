@@ -1,0 +1,28 @@
+import { observable, action } from 'mobx';
+
+const cart = observable({
+    items: [],
+    modified: new Date(),
+});
+
+// Create the actions
+const addItem = action((name, quantity) => {
+    cart.items.push({ name, quantity });
+    cart.modified = new Date();
+});
+
+const removeItem = action(name => {
+    const item = cart.items.find(x => x.name === name);
+    if (item) {
+        item.quantity -= 1;
+
+        if (item.quantity <= 0) {
+            cart.items.remove(item);
+        }
+    }
+});
+
+// Invoke actions
+addItem('balloons', 2);
+addItem('paint', 2);
+removeItem('paint');
