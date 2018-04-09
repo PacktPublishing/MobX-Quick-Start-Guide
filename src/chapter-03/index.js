@@ -1,5 +1,5 @@
 import { store } from './BookStore';
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import {
     Grid,
@@ -13,61 +13,69 @@ import {
 } from 'material-ui';
 import { observer, inject, Provider } from 'mobx-react';
 
+import DevTools from 'mobx-react-devtools';
+
 @inject('store')
 @observer
 class App extends React.Component {
     render() {
-        const { searchText, searchOperation } = this.props.store;
+        const { search } = this.props.store;
 
         return (
             <Grid container>
                 <Grid item xs={12}>
-                    <TextField
-                        placeholder={'Search Books...'}
-                        fullWidth={true}
-                        value={searchText}
+                    <SearchTextField
+                        store={search}
                         onChange={this.updateSearchText}
-                        onKeyUp={this.searchIfEnter}
+                        onEnter={search.search}
                     />
-
-                    {searchOperation === 'pending' ? (
-                        <LinearProgress variant={'query'} />
-                    ) : null}
                 </Grid>
 
-                <ResultsList
-                    store={this.props.store}
-                    style={{ marginTop: '2rem' }}
-                />
+                <ResultsList store={search} style={{ marginTop: '2rem' }} />
             </Grid>
         );
     }
 
     updateSearchText = event => {
-        this.props.store.setSearchText(event.target.value);
-    };
-
-    searchIfEnter = event => {
-        if (event.keyCode !== 13) {
-            return;
-        }
-
-        this.props.store.search();
+        this.props.store.search.setTerm(event.target.value);
     };
 }
 
+const SearchTextField = observer(({ store, onChange, onEnter }) => {
+    const { term, state } = store;
+    return (
+        <Fragment>
+            <TextField
+                placeholder={'Search Books...'}
+                fullWidth={true}
+                value={term}
+                onChange={onChange}
+                onKeyUp={event => {
+                    if (event.keyCode !== 13) {
+                        return;
+                    }
+
+                    onEnter();
+                }}
+            />
+
+            {state === 'pending' ? <LinearProgress variant={'query'} /> : null}
+        </Fragment>
+    );
+});
+
 const ResultsList = observer(({ store, style }) => {
-    const { isSearchEmpty, searchOperation, searchResults } = store;
+    const { isEmpty, results } = store;
 
     return (
         <Grid spacing={16} container style={style}>
-            {isSearchEmpty && searchOperation === 'completed' ? (
+            {isEmpty ? (
                 <Grid item xs={12}>
                     <EmptyResults />
                 </Grid>
             ) : null}
 
-            {searchResults.map(x => (
+            {results.map(x => (
                 <Grid item xs={12} key={x.id}>
                     <BookItem book={x} />
                     <Divider />
@@ -123,7 +131,10 @@ function BookItem({ book }) {
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Fragment>
+            <DevTools />
+            <App />
+        </Fragment>
     </Provider>,
     document.getElementById('root'),
 );

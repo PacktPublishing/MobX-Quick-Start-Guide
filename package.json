@@ -1,12 +1,11 @@
 {
     "name": "mobx-quickstart",
     "version": "1.0.0",
-    "description": "",
+    "description": "Code for the book: MobX QuickStart Guide",
     "keywords": [],
-    "homepage": "https://codesandbox.io/s/new",
+    "homepage": "https://github.com/pavanpodila/mobx-quickstart",
     "main": "src/index.js",
     "dependencies": {
-        "custom-react-scripts": "^0.2.2",
         "material-ui": "^1.0.0-beta.41",
         "mobx": "4.1.1",
         "mobx-react": "5.0.0",
@@ -15,7 +14,10 @@
         "whatwg-fetch": "^2.0.4",
         "xml-js": "^1.6.2"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "custom-react-scripts": "^0.2.2",
+        "mobx-react-devtools": "^5.0.1"
+    },
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",

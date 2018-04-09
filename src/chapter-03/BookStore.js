@@ -1,35 +1,39 @@
 import { searchBooks } from './goodreads.service';
 import { observable, action, computed } from 'mobx';
 
-class BookStore {
-    @observable searchText = 'javascript';
-    @observable searchOperation = ''; // pending | completed | failed
-
-    @observable.shallow searchResults = [];
+class SearchStore {
+    @observable term = 'javascript';
+    @observable state = '';
+    @observable.shallow results = [];
 
     @computed
-    get isSearchEmpty() {
-        return this.searchResults.length === 0;
-    }
-
-    constructor() {
-        this.search();
+    get isEmpty() {
+        return this.results.length === 0 && this.state === 'completed';
     }
 
     @action.bound
-    setSearchText(value) {
-        this.searchText = value;
+    setTerm(value) {
+        this.term = value;
     }
 
     @action.bound
     async search() {
         try {
-            this.searchOperation = 'pending';
-            this.searchResults = await searchBooks(this.searchText);
-            this.searchOperation = 'completed';
+            this.state = 'pending';
+            this.results = await searchBooks(this.term);
+
+            this.state = 'completed';
         } catch (e) {
-            this.searchOperation = 'failed';
+            this.state = 'failed';
         }
+    }
+}
+
+class BookStore {
+    search = new SearchStore();
+
+    constructor() {
+        this.search.search();
     }
 }
 
