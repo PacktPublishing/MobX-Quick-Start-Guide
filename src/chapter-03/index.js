@@ -10,6 +10,8 @@ import {
     CardMedia,
     Typography,
     Divider,
+    AppBar,
+    Toolbar,
 } from 'material-ui';
 import { observer, inject, Provider } from 'mobx-react';
 
@@ -22,17 +24,30 @@ class App extends React.Component {
         const { store } = this.props;
 
         return (
-            <Grid container>
-                <Grid item xs={12}>
-                    <SearchTextField
-                        store={store}
-                        onChange={this.updateSearchText}
-                        onEnter={store.search}
-                    />
-                </Grid>
+            <Fragment>
+                <AppBar
+                    position="static"
+                    color="default"
+                    style={{ marginBottom: 20 }}
+                >
+                    <Toolbar>
+                        <Typography variant="title" color="inherit">
+                            MobX QuickStart Book Store
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <SearchTextField
+                            store={store}
+                            onChange={this.updateSearchText}
+                            onEnter={store.search}
+                        />
+                    </Grid>
 
-                <ResultsList store={store} style={{ marginTop: '2rem' }} />
-            </Grid>
+                    <ResultsList store={store} style={{ marginTop: '2rem' }} />
+                </Grid>
+            </Fragment>
         );
     }
 

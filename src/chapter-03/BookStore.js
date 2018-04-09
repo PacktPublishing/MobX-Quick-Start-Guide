@@ -1,5 +1,5 @@
 import { searchBooks } from './goodreads.service';
-import { observable, action, computed } from 'mobx';
+import { observable, action, computed, runInAction } from 'mobx';
 
 class BookSearchStore {
     @observable term = 'javascript';
@@ -24,13 +24,15 @@ class BookSearchStore {
     async search() {
         try {
             this.state = 'pending';
-            this.results = await searchBooks(this.term);
+            const results = await searchBooks(this.term);
 
-            this.state = 'completed';
+            runInAction(() => {
+                this.results = results;
+                this.state = 'completed';
+            });
         } catch (e) {
             this.state = 'failed';
         }
     }
 }
-
 export const store = new BookSearchStore();
