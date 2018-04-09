@@ -1,7 +1,7 @@
 import { searchBooks } from './goodreads.service';
 import { observable, action, computed } from 'mobx';
 
-class SearchStore {
+class BookSearchStore {
     @observable term = 'javascript';
     @observable state = '';
     @observable.shallow results = [];
@@ -9,6 +9,10 @@ class SearchStore {
     @computed
     get isEmpty() {
         return this.results.length === 0 && this.state === 'completed';
+    }
+
+    constructor() {
+        this.search();
     }
 
     @action.bound
@@ -29,12 +33,4 @@ class SearchStore {
     }
 }
 
-class BookStore {
-    search = new SearchStore();
-
-    constructor() {
-        this.search.search();
-    }
-}
-
-export const store = new BookStore();
+export const store = new BookSearchStore();

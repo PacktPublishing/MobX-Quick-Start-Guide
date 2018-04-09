@@ -19,25 +19,25 @@ import DevTools from 'mobx-react-devtools';
 @observer
 class App extends React.Component {
     render() {
-        const { search } = this.props.store;
+        const { store } = this.props;
 
         return (
             <Grid container>
                 <Grid item xs={12}>
                     <SearchTextField
-                        store={search}
+                        store={store}
                         onChange={this.updateSearchText}
-                        onEnter={search.search}
+                        onEnter={store.search}
                     />
                 </Grid>
 
-                <ResultsList store={search} style={{ marginTop: '2rem' }} />
+                <ResultsList store={store} style={{ marginTop: '2rem' }} />
             </Grid>
         );
     }
 
     updateSearchText = event => {
-        this.props.store.search.setTerm(event.target.value);
+        this.props.store.setTerm(event.target.value);
     };
 }
 
