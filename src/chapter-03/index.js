@@ -2,18 +2,19 @@ import { store } from './BookStore';
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import {
-    Grid,
     Card,
     CardContent,
-    TextField,
-    LinearProgress,
     CardMedia,
-    Typography,
     Divider,
-    AppBar,
-    Toolbar,
+    Grid,
+    InputAdornment,
+    LinearProgress,
+    Paper,
+    TextField,
+    Typography,
 } from 'material-ui';
-import { observer, inject, Provider } from 'mobx-react';
+import Search from '@material-ui/icons/Search';
+import { inject, observer, Provider } from 'mobx-react';
 
 import DevTools from 'mobx-react-devtools';
 
@@ -25,24 +26,22 @@ class App extends React.Component {
 
         return (
             <Fragment>
-                <AppBar
-                    position="static"
-                    color="default"
-                    style={{ marginBottom: 20 }}
+                <Typography
+                    variant="title"
+                    color="inherit"
+                    style={{ marginBottom: 20, textAlign: 'center' }}
                 >
-                    <Toolbar>
-                        <Typography variant="title" color="inherit">
-                            MobX QuickStart Book Store
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
+                    MobX QuickStart Book Store
+                </Typography>
                 <Grid container>
                     <Grid item xs={12}>
-                        <SearchTextField
-                            store={store}
-                            onChange={this.updateSearchText}
-                            onEnter={store.search}
-                        />
+                        <Paper elevation={2} style={{ padding: '1rem' }}>
+                            <SearchTextField
+                                store={store}
+                                onChange={this.updateSearchText}
+                                onEnter={store.search}
+                            />
+                        </Paper>
                     </Grid>
 
                     <ResultsList store={store} style={{ marginTop: '2rem' }} />
@@ -62,6 +61,13 @@ const SearchTextField = observer(({ store, onChange, onEnter }) => {
         <Fragment>
             <TextField
                 placeholder={'Search Books...'}
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <Search />
+                        </InputAdornment>
+                    ),
+                }}
                 fullWidth={true}
                 value={term}
                 onChange={onChange}

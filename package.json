@@ -6,6 +6,7 @@
     "homepage": "https://github.com/pavanpodila/mobx-quickstart",
     "main": "src/index.js",
     "dependencies": {
+        "@material-ui/icons": "^1.0.0-beta.42",
         "material-ui": "^1.0.0-beta.41",
         "mobx": "4.1.1",
         "mobx-react": "5.0.0",

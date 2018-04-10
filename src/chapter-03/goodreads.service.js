@@ -9,14 +9,19 @@ export async function searchBooks(term) {
         `/search/index.xml?key=${APIKEY}&q=${term}`,
     );
 
+    const { 'results-start': start, 'results-end': end } = json.search;
     const innerResults = json.search.results.work;
-    if (isArrayLike(innerResults)) {
-        return innerResults.map(asBook);
-    } else if (innerResults) {
-        return [asBook(innerResults)];
-    }
 
-    return [];
+    const results = isArrayLike(innerResults)
+        ? innerResults.map(asBook)
+        : innerResults ? [asBook(innerResults)] : [];
+
+    return {
+        start: parseInt(start._text, 10),
+        end: parseInt(end._text, 10),
+        total: parseInt(start._text, 10),
+        results,
+    };
 }
 
 function asBook(json) {
