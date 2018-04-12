@@ -7,7 +7,13 @@ const cart = observable({
 
 // Create the actions
 const addItem = action((name, quantity) => {
-    cart.items.push({ name, quantity });
+    const item = cart.items.find(x => x.name === name);
+    if (item) {
+        item.quantity += 1;
+    } else {
+        cart.items.push({ name, quantity });
+    }
+
     cart.modified = new Date();
 });
 
@@ -19,6 +25,8 @@ const removeItem = action(name => {
         if (item.quantity <= 0) {
             cart.items.remove(item);
         }
+
+        cart.modified = new Date();
     }
 });
 

@@ -1,19 +1,19 @@
 import { observable } from 'mobx';
 
 // Create an Observable Map
-const book = observable.map();
+const twitterUserMap = observable.map();
 
-console.log(book.size); // Prints: 0
+console.log(twitterUserMap.size); // Prints: 0
 
 // Add keys
-book.set('name', 'MobX QuickStart Guide');
-book.set('year', 2018);
+twitterUserMap.set('pavanpodila', 'Pavan Podila');
+twitterUserMap.set('mweststrate', 'Michel Weststrate');
 
-console.log(book.get('name')); // Prints: MobX QuickStart Guide
-console.log(book.has('id')); // Prints: false
+console.log(twitterUserMap.get('pavanpodila')); // Prints: Pavan Podila
+console.log(twitterUserMap.has('mweststrate')); // Prints: Michel Weststrate
 
-book.forEach((value, key) => console.log(`${key}: ${value}`));
+twitterUserMap.forEach((value, key) => console.log(`${key}: ${value}`));
 
 // Prints:
-// name: MobX QuickStart Guide
-// year: 2018
+// pavanpodila: Pavan Podila
+// mweststrate: Michel Weststrate

@@ -1,22 +1,11 @@
 import { store } from './BookStore';
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import {
-    Card,
-    CardContent,
-    CardMedia,
-    Divider,
-    Grid,
-    InputAdornment,
-    LinearProgress,
-    Paper,
-    TextField,
-    Typography,
-} from 'material-ui';
-import Search from '@material-ui/icons/Search';
+import { Grid, Paper, Typography } from 'material-ui';
 import { inject, observer, Provider } from 'mobx-react';
 
 import DevTools from 'mobx-react-devtools';
+import { ResultsList, SearchTextField } from './components';
 
 @inject('store')
 @observer
@@ -26,13 +15,8 @@ class App extends React.Component {
 
         return (
             <Fragment>
-                <Typography
-                    variant="title"
-                    color="inherit"
-                    style={{ marginBottom: 20, textAlign: 'center' }}
-                >
-                    MobX QuickStart Book Store
-                </Typography>
+                <Header />
+
                 <Grid container>
                     <Grid item xs={12}>
                         <Paper elevation={2} style={{ padding: '1rem' }}>
@@ -55,105 +39,22 @@ class App extends React.Component {
     };
 }
 
-const SearchTextField = observer(({ store, onChange, onEnter }) => {
-    const { term, state } = store;
+function Header() {
     return (
-        <Fragment>
-            <TextField
-                placeholder={'Search Books...'}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <Search />
-                        </InputAdornment>
-                    ),
-                }}
-                fullWidth={true}
-                value={term}
-                onChange={onChange}
-                onKeyUp={event => {
-                    if (event.keyCode !== 13) {
-                        return;
-                    }
-
-                    onEnter();
-                }}
-            />
-
-            {state === 'pending' ? <LinearProgress variant={'query'} /> : null}
-        </Fragment>
-    );
-});
-
-const ResultsList = observer(({ store, style }) => {
-    const { isEmpty, results } = store;
-
-    return (
-        <Grid spacing={16} container style={style}>
-            {isEmpty ? (
-                <Grid item xs={12}>
-                    <EmptyResults />
-                </Grid>
-            ) : null}
-
-            {results.map(x => (
-                <Grid item xs={12} key={x.id}>
-                    <BookItem book={x} />
-                    <Divider />
-                </Grid>
-            ))}
-        </Grid>
-    );
-});
-
-function EmptyResults() {
-    return (
-        <Card>
-            <CardContent>
-                <Typography variant={'headline'}>No Results</Typography>
-            </CardContent>
-        </Card>
-    );
-}
-
-function BookItem({ book }) {
-    return (
-        <Card
-            elevation={0}
-            style={{
-                flexDirection: 'row',
-                display: 'flex',
-                padding: '1rem',
-            }}
+        <Typography
+            variant="title"
+            color="inherit"
+            style={{ marginBottom: 20, textAlign: 'center' }}
         >
-            <CardMedia
-                src={book.image}
-                component={'img'}
-                style={{ height: 200, width: 'auto' }}
-            />
-            <CardContent>
-                <Typography variant={'headline'}>{book.title}</Typography>
-                <Typography variant={'subheading'}>{book.author}</Typography>
-                <Typography
-                    variant={'subheading'}
-                    style={{ color: 'darkorange' }}
-                >
-                    {book.rating}★<span style={{ color: 'black' }}>
-                        <span>
-                            {' from '}
-                            <strong>{book.totalRatings}</strong> ratings.
-                        </span>
-                    </span>
-                </Typography>
-            </CardContent>
-        </Card>
+            MobX QuickStart Book Store
+        </Typography>
     );
 }
 
 ReactDOM.render(
     <Provider store={store}>
         <Fragment>
-            <DevTools />
+            {/*<DevTools />*/}
             <App />
         </Fragment>
     </Provider>,

@@ -9,7 +9,7 @@ export async function searchBooks(term) {
         `/search/index.xml?key=${APIKEY}&q=${term}`,
     );
 
-    const { 'results-start': start, 'results-end': end } = json.search;
+    const { 'total-results': total } = json.search;
     const innerResults = json.search.results.work;
 
     const results = isArrayLike(innerResults)
@@ -17,10 +17,8 @@ export async function searchBooks(term) {
         : innerResults ? [asBook(innerResults)] : [];
 
     return {
-        start: parseInt(start._text, 10),
-        end: parseInt(end._text, 10),
-        total: parseInt(start._text, 10),
-        results,
+        total: parseInt(total._text, 10),
+        items: results,
     };
 }
 

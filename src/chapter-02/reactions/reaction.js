@@ -18,7 +18,9 @@ class Cart {
                 return item ? item.price : null;
             },
             price => {
-                console.log(`Price changed for ${name}: ${price}`);
+                console.log(
+                    `Price changed for ${name}: ${price !== null ? price : 0}`,
+                );
             },
         );
     }
