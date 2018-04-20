@@ -6,6 +6,14 @@ const searchState = observable({
     state: '',
     results: [],
     totalCount: 0,
+
+    search: action(function() {
+        // invoke search API
+    }),
+
+    setTerm: action(function(value) {
+        this.term = value;
+    }),
 });
 
 class BookSearchStore {
@@ -46,4 +54,5 @@ class BookSearchStore {
         }
     }
 }
+
 export const store = new BookSearchStore();
