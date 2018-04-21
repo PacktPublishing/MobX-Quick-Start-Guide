@@ -14,7 +14,7 @@ import Search from '@material-ui/icons/Search';
 import { observer } from 'mobx-react';
 
 export const SearchTextField = observer(({ store, onChange, onEnter }) => {
-    const { term, state } = store;
+    const { term, status } = store;
     return (
         <Fragment>
             <TextField
@@ -38,9 +38,9 @@ export const SearchTextField = observer(({ store, onChange, onEnter }) => {
                 }}
             />
 
-            {state === 'pending' ? <LinearProgress variant={'query'} /> : null}
+            {status === 'pending' ? <LinearProgress variant={'query'} /> : null}
 
-            {state === 'failed' ? (
+            {status === 'failed' ? (
                 <Typography
                     variant={'subheading'}
                     style={{ color: 'red', marginTop: '1rem' }}
@@ -53,17 +53,17 @@ export const SearchTextField = observer(({ store, onChange, onEnter }) => {
 });
 
 export const ResultsList = observer(({ store, style }) => {
-    const { isEmpty, results, totalCount, state } = store;
+    const { isEmpty, results, totalCount, status } = store;
 
     return (
         <Grid spacing={16} container style={style}>
-            {isEmpty && state === 'completed' ? (
+            {isEmpty && status === 'completed' ? (
                 <Grid item xs={12}>
                     <EmptyResults />
                 </Grid>
             ) : null}
 
-            {!isEmpty && state === 'completed' ? (
+            {!isEmpty && status === 'completed' ? (
                 <Grid item xs={12}>
                     <Typography>
                         Showing <strong>{results.length}</strong> of{' '}

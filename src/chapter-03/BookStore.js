@@ -3,7 +3,7 @@ import { observable, action, computed, runInAction } from 'mobx';
 
 const searchState = observable({
     term: '',
-    state: '',
+    status: '',
     results: [],
     totalCount: 0,
 
@@ -18,7 +18,7 @@ const searchState = observable({
 
 class BookSearchStore {
     @observable term = 'javascript';
-    @observable state = '';
+    @observable status = '';
     @observable.shallow results = [];
 
     @observable totalCount = 0;
@@ -40,16 +40,16 @@ class BookSearchStore {
     @action.bound
     async search() {
         try {
-            this.state = 'pending';
+            this.status = 'pending';
             const result = await searchBooks(this.term);
 
             runInAction(() => {
                 this.totalCount = result.total;
                 this.results = result.items;
-                this.state = 'completed';
+                this.status = 'completed';
             });
         } catch (e) {
-            this.state = 'failed';
+            runInAction(() => (this.status = 'failed'));
             console.log(e);
         }
     }
