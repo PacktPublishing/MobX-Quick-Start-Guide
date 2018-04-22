@@ -21,14 +21,13 @@ class App extends React.Component {
                     <Grid item xs={12}>
                         <Paper elevation={2} style={{ padding: '1rem' }}>
                             <SearchTextField
-                                store={store}
                                 onChange={this.updateSearchText}
                                 onEnter={store.search}
                             />
                         </Paper>
                     </Grid>
 
-                    <ResultsList store={store} style={{ marginTop: '2rem' }} />
+                    <ResultsList style={{ marginTop: '2rem' }} />
                 </Grid>
             </Fragment>
         );
@@ -54,7 +53,7 @@ function Header() {
 ReactDOM.render(
     <Provider store={store}>
         <Fragment>
-            {/*<DevTools />*/}
+            <DevTools />
             <App />
         </Fragment>
     </Provider>,

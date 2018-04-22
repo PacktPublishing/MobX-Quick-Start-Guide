@@ -1,20 +1,20 @@
 import { searchBooks } from './goodreads.service';
 import { observable, action, computed, runInAction } from 'mobx';
 
-const searchState = observable({
-    term: '',
-    status: '',
-    results: [],
-    totalCount: 0,
-
-    search: action(function() {
-        // invoke search API
-    }),
-
-    setTerm: action(function(value) {
-        this.term = value;
-    }),
-});
+// const searchState = observable({
+//     term: '',
+//     status: '',
+//     results: [],
+//     totalCount: 0,
+//
+//     search: action(function() {
+//         // invoke search API
+//     }),
+//
+//     setTerm: action(function(value) {
+//         this.term = value;
+//     }),
+// });
 
 class BookSearchStore {
     @observable term = 'javascript';

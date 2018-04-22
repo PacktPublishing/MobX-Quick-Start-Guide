@@ -11,77 +11,129 @@ import {
     Typography,
 } from 'material-ui';
 import Search from '@material-ui/icons/Search';
-import { observer } from 'mobx-react';
+import { observer, inject, Observer } from 'mobx-react';
 
-export const SearchTextField = observer(({ store, onChange, onEnter }) => {
-    const { term, status } = store;
-    return (
-        <Fragment>
-            <TextField
-                placeholder={'Search Books...'}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <Search />
-                        </InputAdornment>
-                    ),
-                }}
-                fullWidth={true}
-                value={term}
-                onChange={onChange}
-                onKeyUp={event => {
-                    if (event.keyCode !== 13) {
-                        return;
-                    }
+@inject('store')
+@observer
+export class SearchTextField extends React.Component {
+    render() {
+        const { store, onChange } = this.props;
+        const { term } = store;
 
-                    onEnter();
-                }}
-            />
+        return (
+            <Fragment>
+                <TextField
+                    placeholder={'Search Books...'}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Search />
+                            </InputAdornment>
+                        ),
+                    }}
+                    fullWidth={true}
+                    value={term}
+                    onChange={onChange}
+                    onKeyUp={this.onKeyUp}
+                />
 
-            {status === 'pending' ? <LinearProgress variant={'query'} /> : null}
+                <SearchStatus />
+            </Fragment>
+        );
+    }
 
-            {status === 'failed' ? (
-                <Typography
-                    variant={'subheading'}
-                    style={{ color: 'red', marginTop: '1rem' }}
-                >
-                    Something failed!
-                </Typography>
-            ) : null}
-        </Fragment>
-    );
-});
+    onKeyUp = event => {
+        if (event.keyCode !== 13) {
+            return;
+        }
 
-export const ResultsList = observer(({ store, style }) => {
-    const { isEmpty, results, totalCount, status } = store;
+        this.props.onEnter();
+    };
+}
 
-    return (
-        <Grid spacing={16} container style={style}>
-            {isEmpty && status === 'completed' ? (
-                <Grid item xs={12}>
-                    <EmptyResults />
-                </Grid>
-            ) : null}
+export const SearchStatus = inject('store')(
+    observer(({ store }) => {
+        const { status, term } = store;
 
-            {!isEmpty && status === 'completed' ? (
-                <Grid item xs={12}>
-                    <Typography>
-                        Showing <strong>{results.length}</strong> of{' '}
-                        {totalCount} results.
+        return (
+            <Fragment>
+                {status === 'pending' ? (
+                    <LinearProgress variant={'query'} />
+                ) : null}
+
+                {status === 'failed' ? (
+                    <Typography
+                        variant={'subheading'}
+                        style={{ color: 'red', marginTop: '1rem' }}
+                    >
+                        {`Failed to fetch results for "${term}"`}
                     </Typography>
-                    <Divider />
-                </Grid>
-            ) : null}
+                ) : null}
+            </Fragment>
+        );
+    }),
+);
 
-            {results.map(x => (
-                <Grid item xs={12} key={x.id}>
-                    <BookItem book={x} />
-                    <Divider />
-                </Grid>
-            ))}
-        </Grid>
-    );
-});
+// Using an <Observer />
+// export const SearchStatus = () => {
+//     return (
+//         <Observer
+//             inject={({ store }) => store}
+//             render={({ store }) => {
+//                 const { status, term } = store;
+//                 return (
+//                     <Fragment>
+//                         {status === 'pending' ? (
+//                             <LinearProgress variant={'query'} />
+//                         ) : null}
+//
+//                         {status === 'failed' ? (
+//                             <Typography
+//                                 variant={'subheading'}
+//                                 style={{ color: 'red', marginTop: '1rem' }}
+//                             >
+//                                 {`Failed to fetch results for "${term}"`}
+//                             </Typography>
+//                         ) : null}
+//                     </Fragment>
+//                 );
+//             }}
+//         />
+//     );
+// };
+
+export const ResultsList = inject('store')(
+    observer(({ store, style }) => {
+        const { isEmpty, results, totalCount, status } = store;
+
+        return (
+            <Grid spacing={16} container style={style}>
+                {isEmpty && status === 'completed' ? (
+                    <Grid item xs={12}>
+                        <EmptyResults />
+                    </Grid>
+                ) : null}
+
+                {!isEmpty && status === 'completed' ? (
+                    <Grid item xs={12}>
+                        <Typography>
+                            Showing <strong>{results.length}</strong> of{' '}
+                            {totalCount} results.
+                        </Typography>
+                        <Divider />
+                    </Grid>
+                ) : null}
+
+                {results.map(x => (
+                    <Grid item xs={12} key={x.id}>
+                        <BookItem book={x} />
+                        <Divider />
+                    </Grid>
+                ))}
+            </Grid>
+        );
+    }),
+);
 
 function EmptyResults() {
     return (
