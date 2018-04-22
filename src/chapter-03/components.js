@@ -74,66 +74,43 @@ export const SearchStatus = inject('store')(
     }),
 );
 
-// Using an <Observer />
-// export const SearchStatus = () => {
-//     return (
-//         <Observer
-//             inject={({ store }) => store}
-//             render={({ store }) => {
-//                 const { status, term } = store;
-//                 return (
-//                     <Fragment>
-//                         {status === 'pending' ? (
-//                             <LinearProgress variant={'query'} />
-//                         ) : null}
-//
-//                         {status === 'failed' ? (
-//                             <Typography
-//                                 variant={'subheading'}
-//                                 style={{ color: 'red', marginTop: '1rem' }}
-//                             >
-//                                 {`Failed to fetch results for "${term}"`}
-//                             </Typography>
-//                         ) : null}
-//                     </Fragment>
-//                 );
-//             }}
-//         />
-//     );
-// };
+export const ResultsList = () => {
+    return (
+        <Observer
+            inject={({store}) => ({searchStore: store})}
+            render={({ searchStore, style }) => {
+                const { isEmpty, results, totalCount, status } = searchStore;
 
-export const ResultsList = inject('store')(
-    observer(({ store, style }) => {
-        const { isEmpty, results, totalCount, status } = store;
+                return (
+                    <Grid spacing={16} container style={style}>
+                        {isEmpty && status === 'completed' ? (
+                            <Grid item xs={12}>
+                                <EmptyResults />
+                            </Grid>
+                        ) : null}
 
-        return (
-            <Grid spacing={16} container style={style}>
-                {isEmpty && status === 'completed' ? (
-                    <Grid item xs={12}>
-                        <EmptyResults />
+                        {!isEmpty && status === 'completed' ? (
+                            <Grid item xs={12}>
+                                <Typography>
+                                    Showing <strong>{results.length}</strong> of{' '}
+                                    {totalCount} results.
+                                </Typography>
+                                <Divider />
+                            </Grid>
+                        ) : null}
+
+                        {results.map(x => (
+                            <Grid item xs={12} key={x.id}>
+                                <BookItem book={x} />
+                                <Divider />
+                            </Grid>
+                        ))}
                     </Grid>
-                ) : null}
-
-                {!isEmpty && status === 'completed' ? (
-                    <Grid item xs={12}>
-                        <Typography>
-                            Showing <strong>{results.length}</strong> of{' '}
-                            {totalCount} results.
-                        </Typography>
-                        <Divider />
-                    </Grid>
-                ) : null}
-
-                {results.map(x => (
-                    <Grid item xs={12} key={x.id}>
-                        <BookItem book={x} />
-                        <Divider />
-                    </Grid>
-                ))}
-            </Grid>
-        );
-    }),
-);
+                );
+            }}
+        />
+    );
+};
 
 function EmptyResults() {
     return (
