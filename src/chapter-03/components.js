@@ -11,7 +11,7 @@ import {
     Typography,
 } from 'material-ui';
 import Search from '@material-ui/icons/Search';
-import { observer, inject, Observer } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 
 @inject('store')
 @observer
@@ -74,43 +74,73 @@ export const SearchStatus = inject('store')(
     }),
 );
 
-export const ResultsList = () => {
-    return (
-        <Observer
-            inject={({store}) => ({searchStore: store})}
-            render={({ searchStore, style }) => {
-                const { isEmpty, results, totalCount, status } = searchStore;
+// export const ResultsList = inject(({ store }) => ({ searchStore: store }))(
+//     observer(({ searchStore, style }) => {
+//         const { isEmpty, results, totalCount, status } = searchStore;
+//         return (
+//             <Grid spacing={16} container style={style}>
+//                 {isEmpty && status === 'completed' ? (
+//                     <Grid item xs={12}>
+//                         <EmptyResults />
+//                     </Grid>
+//                 ) : null}
+//
+//                 {!isEmpty && status === 'completed' ? (
+//                     <Grid item xs={12}>
+//                         <Typography>
+//                             Showing <strong>{results.length}</strong> of{' '}
+//                             {totalCount} results.
+//                         </Typography>
+//                         <Divider />
+//                     </Grid>
+//                 ) : null}
+//
+//                 {results.map(x => (
+//                     <Grid item xs={12} key={x.id}>
+//                         <BookItem book={x} />
+//                         <Divider />
+//                     </Grid>
+//                 ))}
+//             </Grid>
+//         );
+//     }),
+// );
 
-                return (
-                    <Grid spacing={16} container style={style}>
-                        {isEmpty && status === 'completed' ? (
-                            <Grid item xs={12}>
-                                <EmptyResults />
-                            </Grid>
-                        ) : null}
+@inject(({ store }) => ({ searchStore: store }))
+@observer
+export class ResultsList extends React.Component {
+    render() {
+        const { searchStore, style } = this.props;
+        const { isEmpty, results, totalCount, status } = searchStore;
 
-                        {!isEmpty && status === 'completed' ? (
-                            <Grid item xs={12}>
-                                <Typography>
-                                    Showing <strong>{results.length}</strong> of{' '}
-                                    {totalCount} results.
-                                </Typography>
-                                <Divider />
-                            </Grid>
-                        ) : null}
-
-                        {results.map(x => (
-                            <Grid item xs={12} key={x.id}>
-                                <BookItem book={x} />
-                                <Divider />
-                            </Grid>
-                        ))}
+        return (
+            <Grid spacing={16} container style={style}>
+                {isEmpty && status === 'completed' ? (
+                    <Grid item xs={12}>
+                        <EmptyResults />
                     </Grid>
-                );
-            }}
-        />
-    );
-};
+                ) : null}
+
+                {!isEmpty && status === 'completed' ? (
+                    <Grid item xs={12}>
+                        <Typography>
+                            Showing <strong>{results.length}</strong> of{' '}
+                            {totalCount} results.
+                        </Typography>
+                        <Divider />
+                    </Grid>
+                ) : null}
+
+                {results.map(x => (
+                    <Grid item xs={12} key={x.id}>
+                        <BookItem book={x} />
+                        <Divider />
+                    </Grid>
+                ))}
+            </Grid>
+        );
+    }
+}
 
 function EmptyResults() {
     return (

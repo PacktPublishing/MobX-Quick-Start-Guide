@@ -6,12 +6,12 @@
     "homepage": "https://github.com/pavanpodila/mobx-quickstart",
     "main": "src/index.js",
     "dependencies": {
-        "@material-ui/icons": "^1.0.0-beta.42",
-        "material-ui": "^1.0.0-beta.41",
-        "mobx": "4.1.1",
-        "mobx-react": "5.0.0",
-        "react": "16.2.0",
-        "react-dom": "16.2.0",
+        "@material-ui/icons": "^1.0.0-beta.43",
+        "material-ui": "^1.0.0-beta.43",
+        "mobx": "^4.2.0",
+        "mobx-react": "^5.0.0",
+        "react": "^16.3.2",
+        "react-dom": "^16.3.2",
         "whatwg-fetch": "^2.0.4",
         "xml-js": "^1.6.2"
     },

@@ -1,4 +1,4 @@
-import { store } from './BookStore';
+import { store } from './book-store';
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Grid, Paper, Typography } from 'material-ui';
