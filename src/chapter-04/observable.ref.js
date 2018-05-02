@@ -6,7 +6,6 @@ class FormData {
     @observable username = '';
     @observable password = '';
 
-    @observable
     @action
     validate() {
         const { username, password } = this;
