@@ -11,12 +11,21 @@ class Todo {
 
 class TodoList {
     @observable.shallow todos = [];
+
+    @computed
     get pendingTodos() {
         return this.todos.filter(x => x.done === false);
     }
 
+    @computed
     get completedTodos() {
         return this.todos.filter(x => x.done);
+    }
+
+    @computed
+    get pendingTodosDescription() {
+        const count = this.pendingTodos.length;
+        return `${count} ${count === 1 ? 'todo' : 'todos'} remaining`;
     }
 
     @action
@@ -25,9 +34,6 @@ class TodoList {
         this.todos.push(todo);
     }
 }
-decorate(TodoList, {
-    pendingTodos: computed({ name: 'pending-todos' }),
-});
 
 class TodoManager {
     list = null;
