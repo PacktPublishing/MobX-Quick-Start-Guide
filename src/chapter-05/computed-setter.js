@@ -1,33 +1,34 @@
-import { observable, computed, decorate } from 'mobx';
+import { observable, computed, decorate, comparer } from 'mobx';
 
 class Contact {
     @observable firstName = '';
     @observable lastName = '';
 
+    @computed
     get fullName() {
         return `${this.firstName} ${this.lastName}`;
     }
 
-    // this works
-    // set fullName(value) {
-    //     const [firstName, lastName] = value.split(' ');
-    //
-    //     this.firstName = firstName;
-    //     this.lastName = lastName;
-    // }
+    set fullName(value) {
+        const [firstName, lastName] = value.split(' ');
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
 
-decorate(Contact, {
-    fullName: computed({
-        // This doesn't work
-        set: function(value) {
-            const [firstName, lastName] = value.split(' ');
-
-            this.firstName = firstName;
-            this.last = lastName;
-        },
-    }),
-});
+// decorate(Contact, {
+//     fullName: computed({
+//         // This doesn't work
+//         set: function(value) {
+//             const [firstName, lastName] = value.split(' ');
+//
+//             this.firstName = firstName;
+//             this.last = lastName;
+//         },
+//         equals: comparer.identity,
+//     }),
+// });
 
 const c = new Contact();
 
