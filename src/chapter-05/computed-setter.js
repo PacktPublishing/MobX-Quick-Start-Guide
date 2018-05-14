@@ -5,23 +5,23 @@ class Contact {
     @observable lastName = '';
 
     @computed({
-        set(value) {
-            const [firstName, lastName] = value.split(' ');
-
-            this.firstName = firstName;
-            this.lastName = lastName;
-        },
+        // set(value) {
+        //     const [firstName, lastName] = value.split(' ');
+        //
+        //     this.firstName = firstName;
+        //     this.lastName = lastName;
+        // },
     })
     get fullName() {
         return `${this.firstName} ${this.lastName}`;
     }
 
-    // set fullName(value) {
-    //     const [firstName, lastName] = value.split(' ');
-    //
-    //     this.firstName = firstName;
-    //     this.lastName = lastName;
-    // }
+    set fullName(value) {
+        const [firstName, lastName] = value.split(' ');
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
 
 // decorate(Contact, {
