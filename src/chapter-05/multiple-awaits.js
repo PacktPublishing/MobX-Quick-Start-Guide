@@ -53,4 +53,4 @@ class AuthStore {
 }
 
 const promise = new AuthStore().login2();
-promise.cancel();
+// promise.cancel();
