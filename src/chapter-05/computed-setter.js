@@ -1,10 +1,16 @@
-import { observable, computed, decorate, comparer } from 'mobx';
+import { observable, computed, decorate, comparer, spy } from 'mobx';
+
+spy(event => {
+    console.log(`${event.type}: ${event.name} with args: ${event.arguments}`);
+});
 
 class Contact {
     @observable firstName = '';
     @observable lastName = '';
 
     @computed({
+        name: 'Full name computation',
+        // Option 1 for a setter
         // set(value) {
         //     const [firstName, lastName] = value.split(' ');
         //
@@ -16,6 +22,7 @@ class Contact {
         return `${this.firstName} ${this.lastName}`;
     }
 
+    // Option 2 for a setter
     set fullName(value) {
         const [firstName, lastName] = value.split(' ');
 
@@ -26,12 +33,12 @@ class Contact {
 
 // decorate(Contact, {
 //     fullName: computed({
-//         // This doesn't work
+//         // Option 3 for a setter
 //         set: function(value) {
 //             const [firstName, lastName] = value.split(' ');
 //
 //             this.firstName = firstName;
-//             this.last = lastName;
+//             this.lastName = lastName;
 //         },
 //         equals: comparer.identity,
 //     }),
