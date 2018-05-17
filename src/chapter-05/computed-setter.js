@@ -1,8 +1,8 @@
-import { observable, computed, decorate, comparer, spy } from 'mobx';
+import { observable, computed, decorate, comparer, spy, configure } from 'mobx';
 
-spy(event => {
-    console.log(`${event.type}: ${event.name} with args: ${event.arguments}`);
-});
+// spy(event => {
+//     console.log(`${event.type}: ${event.name} with args: ${event.arguments}`);
+// });
 
 class Contact {
     @observable firstName = '';

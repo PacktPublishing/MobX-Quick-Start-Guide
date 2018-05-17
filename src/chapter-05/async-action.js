@@ -29,3 +29,5 @@ class ShoppingCart {
 const cart = new ShoppingCart();
 
 // cart.submit();
+
+configure({ enforceActions: false });
