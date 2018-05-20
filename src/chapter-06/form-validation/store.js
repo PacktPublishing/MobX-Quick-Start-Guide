@@ -33,16 +33,20 @@ const rules = {
 
 class UserEnrollmentData {
     @observable email = '';
+    @observable password = '';
     @observable firstName = '';
     @observable lastName = '';
-    @observable password = '';
 
     @observable validating = false;
     @observable.ref errors = null;
 
-    @observable enrollmentStatus = '';
+    @observable enrollmentStatus = 'none';
 
     constructor() {
+        this.setupValidation();
+    }
+
+    setupValidation() {
         reaction(
             () => {
                 const { firstName, lastName, password, email } = this;
@@ -99,7 +103,7 @@ class UserEnrollmentData {
 
     @action
     reset() {
-        this.enrollmentStatus = '';
+        this.enrollmentStatus = 'none';
     }
 }
 

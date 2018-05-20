@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { inject, Observer, observer } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import {
     Button,
     Grid,
@@ -12,7 +12,6 @@ import { CheckCircle } from '@material-ui/icons';
 import { CircularProgress } from '@material-ui/core/es/index';
 
 @inject(stores => ({ store: stores.store }))
-@observer
 class UserEnrollmentForm extends React.Component {
     render() {
         const { store } = this.props;
@@ -29,6 +28,15 @@ class UserEnrollmentForm extends React.Component {
 
                     <CenteredGridItem>
                         <InputField
+                            type={'password'}
+                            field={'password'}
+                            label={'Password'}
+                            store={store}
+                        />
+                    </CenteredGridItem>
+
+                    <CenteredGridItem>
+                        <InputField
                             type={'text'}
                             field={'firstName'}
                             label={'First Name'}
@@ -41,15 +49,6 @@ class UserEnrollmentForm extends React.Component {
                             type={'text'}
                             field={'lastName'}
                             label={'Last Name'}
-                            store={store}
-                        />
-                    </CenteredGridItem>
-
-                    <CenteredGridItem>
-                        <InputField
-                            type={'password'}
-                            field={'password'}
-                            label={'Password'}
                             store={store}
                         />
                     </CenteredGridItem>
@@ -98,20 +97,15 @@ const EnrollButton = observer(({ store }) => {
 });
 
 const EmailInputField = observer(({ store }) => {
-    const { errors, validating } = store;
-    const hasError = !!(errors && errors.email);
+    const { validating } = store;
 
     return (
         <Fragment>
-            <TextField
-                fullWidth
+            <InputField
                 type={'text'}
-                value={store.email}
+                store={store}
+                field={'email'}
                 label={'Email'}
-                error={hasError}
-                helperText={hasError ? errors.email[0] : null}
-                onChange={event => store.setField('email', event.target.value)}
-                margin={'normal'}
             />
             {validating ? <LinearProgress variant={'query'} /> : null}
         </Fragment>
