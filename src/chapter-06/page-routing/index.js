@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom';
 import { Router, Route, Switch, Link } from 'react-router-dom';
 import { tracker } from './history';
 import { autorun } from 'mobx';
+import { inject, observer } from 'mobx-react';
+import {
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Typography,
+    Button,
+} from '@material-ui/core';
+import { Provider } from 'mobx-react';
+import { CheckoutWorkflow } from './CheckoutWorkflow';
+import { Grid } from '@material-ui/core/es/index';
 
 const routes = {
     cart: { path: '/', label: 'Shopping Cart' },
@@ -11,11 +23,10 @@ const routes = {
     track: { path: '/track', label: 'Track Order' },
 };
 
-window.tracker = tracker;
 tracker.startListening(routes);
 
 autorun(() => {
-    console.log(tracker.currentRoute);
+    console.log(tracker.page);
 });
 
 class App extends React.Component {
@@ -23,7 +34,7 @@ class App extends React.Component {
         return (
             <Router history={tracker.history}>
                 <Switch>
-                    <Route exact path={'/'} component={ShowLinks} />
+                    <Route exact path={'/'} component={ShowCart} />
                     <Route
                         exact
                         path={'/payment'}
@@ -41,22 +52,58 @@ class App extends React.Component {
     }
 }
 
-function ShowLinks() {
-    return (
-        <Fragment>
-            {Object.keys(routes).map(route => {
-                const info = routes[route];
-                return (
-                    <Link key={info.path} to={info.path}>
-                        {info.label}
-                    </Link>
-                );
-            })}
-        </Fragment>
-    );
+@inject('store')
+@observer
+class ShowCart extends React.Component {
+    componentDidMount() {
+        this.props.store.loadCart();
+    }
+
+    render() {
+        const { items } = this.props.store;
+
+        return (
+            <Fragment>
+                <Typography
+                    variant={'headline'}
+                    style={{ textAlign: 'center' }}
+                >
+                    Check out
+                </Typography>
+                <List>
+                    {items.map(item => {
+                        return (
+                            <ListItem key={item.title}>
+                                <ListItemIcon>
+                                    <item.icon
+                                        style={{ height: 64, width: 64 }}
+                                    />
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary={item.title}
+                                    secondary={`$${item.price}`}
+                                />
+                            </ListItem>
+                        );
+                    })}
+                </List>
+
+                <Grid justify={'center'} container>
+                    <Button variant={'raised'} color={'primary'}>
+                        Checkout
+                    </Button>
+                </Grid>
+            </Fragment>
+        );
+    }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={new CheckoutWorkflow()}>
+        <App />
+    </Provider>,
+    document.getElementById('root'),
+);
 
 /*
 * A set of page names mapped to routes
