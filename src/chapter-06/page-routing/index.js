@@ -1,99 +1,54 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Switch, Link } from 'react-router-dom';
+import { Route, Router, Switch } from 'react-router-dom';
 import { tracker } from './history';
 import { autorun } from 'mobx';
-import { inject, observer } from 'mobx-react';
-import {
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    Typography,
-    Button,
-} from '@material-ui/core';
 import { Provider } from 'mobx-react';
 import { CheckoutWorkflow } from './CheckoutWorkflow';
-import { Grid } from '@material-ui/core/es/index';
-
-const routes = {
-    cart: { path: '/', label: 'Shopping Cart' },
-    payment: { path: '/payment', label: 'Make Payment' },
-    confirm: { path: '/confirm', label: 'Confirm Order' },
-    track: { path: '/track', label: 'Track Order' },
-};
-
-tracker.startListening(routes);
-
-autorun(() => {
-    console.log(tracker.page);
-});
+import { Paper } from '@material-ui/core/es/index';
+import { ShowCart } from './show-cart';
+import { StepComponent } from './shared';
 
 class App extends React.Component {
     render() {
         return (
-            <Router history={tracker.history}>
-                <Switch>
-                    <Route exact path={'/'} component={ShowCart} />
-                    <Route
-                        exact
-                        path={'/payment'}
-                        render={props => 'Payment'}
-                    />
-                    <Route
-                        exact
-                        path={'/confirm'}
-                        render={props => 'Confirmation'}
-                    />
-                    <Route exact path={'/track'} render={props => 'Track'} />
-                </Switch>
-            </Router>
-        );
-    }
-}
-
-@inject('store')
-@observer
-class ShowCart extends React.Component {
-    componentDidMount() {
-        this.props.store.loadCart();
-    }
-
-    render() {
-        const { items } = this.props.store;
-
-        return (
-            <Fragment>
-                <Typography
-                    variant={'headline'}
-                    style={{ textAlign: 'center' }}
-                >
-                    Check out
-                </Typography>
-                <List>
-                    {items.map(item => {
-                        return (
-                            <ListItem key={item.title}>
-                                <ListItemIcon>
-                                    <item.icon
-                                        style={{ height: 64, width: 64 }}
-                                    />
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={item.title}
-                                    secondary={`$${item.price}`}
+            <Paper elevation={2} style={{ padding: 20 }}>
+                <Router history={tracker.history}>
+                    <Switch>
+                        <Route exact path={'/'} component={ShowCart} />
+                        <Route
+                            exact
+                            path={'/payment'}
+                            render={props => (
+                                <StepComponent
+                                    title={'Payment'}
+                                    operationTitle={'Confirm'}
                                 />
-                            </ListItem>
-                        );
-                    })}
-                </List>
-
-                <Grid justify={'center'} container>
-                    <Button variant={'raised'} color={'primary'}>
-                        Checkout
-                    </Button>
-                </Grid>
-            </Fragment>
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={'/confirm'}
+                            render={props => (
+                                <StepComponent
+                                    title={'Confirmation'}
+                                    operationTitle={'Track Order'}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={'/track'}
+                            render={props => (
+                                <StepComponent
+                                    title={'Track your order'}
+                                    operationTitle={'Continue Shopping'}
+                                />
+                            )}
+                        />
+                    </Switch>
+                </Router>
+            </Paper>
         );
     }
 }
