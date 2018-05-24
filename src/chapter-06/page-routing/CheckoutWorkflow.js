@@ -78,11 +78,11 @@ class TrackStep extends MockWorkflowStep {
 }
 
 const routes = {
-    shopping: { path: '/', label: 'Show Cart' },
-    cart: { path: '/cart', label: 'Shopping Cart' },
-    payment: { path: '/payment', label: 'Make Payment' },
-    confirm: { path: '/confirm', label: 'Confirm Order' },
-    track: { path: '/track', label: 'Track Order' },
+    shopping: '/',
+    cart: '/cart',
+    payment: '/payment',
+    confirm: '/confirm',
+    track: '/track',
 };
 
 export class CheckoutWorkflow {
@@ -151,6 +151,7 @@ export class CheckoutWorkflow {
     }
 }
 
+//region Utilities
 async function getCartItems() {
     await delay(500);
 
@@ -178,3 +179,4 @@ async function doAsync(getPromise, setState) {
         });
     }
 }
+//endregion

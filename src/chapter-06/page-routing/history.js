@@ -13,7 +13,7 @@ class HistoryTracker {
             page => {
                 const route = this.routes[page];
                 if (route) {
-                    this.history.push(route.path);
+                    this.history.push(route);
                 }
             },
         );
@@ -47,7 +47,7 @@ class HistoryTracker {
         const routes = this.routes;
 
         this.page = Object.keys(routes).find(key => {
-            const { path } = routes[key];
+            const path = routes[key];
             return path.startsWith(pathname);
         });
     }
