@@ -1,4 +1,12 @@
-import { observable, action, computed, runInAction, when, autorun } from 'mobx';
+import {
+    observable,
+    action,
+    computed,
+    runInAction,
+    when,
+    autorun,
+    reaction,
+} from 'mobx';
 import React from 'react';
 import LaptopMac from '@material-ui/icons/LaptopMac';
 import Headset from '@material-ui/icons/Headset';
@@ -6,6 +14,7 @@ import Keyboard from '@material-ui/icons/Keyboard';
 import { tracker } from './history';
 
 class WorkflowStep {
+    workflow = null;
     @observable loadState = 'none'; // pending | completed | failed
     @observable operationState = 'none'; // pending | completed | failed
 
@@ -58,12 +67,19 @@ class MockWorkflowStep extends WorkflowStep {
         return delay(1000);
     }
 }
+class ShoppingStep extends MockWorkflowStep {}
 class PaymentStep extends MockWorkflowStep {}
 class ConfirmStep extends MockWorkflowStep {}
-class TrackStep extends MockWorkflowStep {}
+class TrackStep extends MockWorkflowStep {
+    async getMainOperation() {
+        await delay(500);
+        runInAction(() => (this.workflow.currentStep = 'shopping'));
+    }
+}
 
 const routes = {
-    cart: { path: '/', label: 'Shopping Cart' },
+    shopping: { path: '/', label: 'Show Cart' },
+    cart: { path: '/cart', label: 'Shopping Cart' },
     payment: { path: '/payment', label: 'Make Payment' },
     confirm: { path: '/confirm', label: 'Confirm Order' },
     track: { path: '/track', label: 'Track Order' },
@@ -71,14 +87,16 @@ const routes = {
 
 export class CheckoutWorkflow {
     static steps = [
+        { name: 'shopping', stepClass: ShoppingStep },
         { name: 'cart', stepClass: ShowCartStep },
         { name: 'payment', stepClass: PaymentStep },
         { name: 'confirm', stepClass: ConfirmStep },
         { name: 'track', stepClass: TrackStep },
     ];
 
-    @observable currentStep = null;
+    nextStepPromise = null;
 
+    @observable currentStep = null;
     @observable.ref step = null;
 
     constructor() {
@@ -99,33 +117,38 @@ export class CheckoutWorkflow {
                 tracker.page = CheckoutWorkflow.steps[stepIndex].name;
             }
         });
+
+        reaction(
+            () => tracker.page,
+            page => {
+                this.currentStep = page;
+            },
+        );
     }
 
     @action
     async loadStep(stepIndex) {
+        if (this.nextStepPromise) {
+            this.nextStepPromise.cancel();
+        }
+
         const StepClass = CheckoutWorkflow.steps[stepIndex].stepClass;
         this.step = new StepClass();
+        this.step.workflow = this;
         this.step.load();
-        await when(() => this.step.operationState === 'completed');
+        this.nextStepPromise = when(
+            () => this.step.operationState === 'completed',
+        );
+
+        await this.nextStepPromise;
 
         const nextStepIndex = stepIndex + 1;
         if (nextStepIndex >= CheckoutWorkflow.steps.length) {
             return;
         }
 
-        runInAction(() => {
-            this.currentStep = CheckoutWorkflow.steps[nextStepIndex].name;
-        });
+        this.currentStep = CheckoutWorkflow.steps[nextStepIndex].name;
     }
-
-    @action.bound
-    async checkoutCart() {}
-
-    @action.bound
-    async makePayment() {}
-
-    @action.bound
-    async trackOrder() {}
 }
 
 async function getCartItems() {

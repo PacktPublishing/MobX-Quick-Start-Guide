@@ -2,12 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Router, Switch } from 'react-router-dom';
 import { tracker } from './history';
-import { autorun } from 'mobx';
 import { Provider } from 'mobx-react';
 import { CheckoutWorkflow } from './CheckoutWorkflow';
 import { Paper } from '@material-ui/core/es/index';
 import { ShowCart } from './show-cart';
-import { StepComponent } from './shared';
+import {
+    ConfirmDescription,
+    PaymentDescription,
+    ShoppingDescription,
+    TemplateStepComponent,
+    TrackOrderDescription,
+} from './shared';
 
 class App extends React.Component {
     render() {
@@ -15,13 +20,25 @@ class App extends React.Component {
             <Paper elevation={2} style={{ padding: 20 }}>
                 <Router history={tracker.history}>
                     <Switch>
-                        <Route exact path={'/'} component={ShowCart} />
+                        <Route
+                            exact
+                            path={'/'}
+                            component={() => (
+                                <TemplateStepComponent
+                                    title={'MobX Shop'}
+                                    renderDescription={ShoppingDescription}
+                                    operationTitle={'View Cart'}
+                                />
+                            )}
+                        />
+                        <Route exact path={'/cart'} component={ShowCart} />
                         <Route
                             exact
                             path={'/payment'}
-                            render={props => (
-                                <StepComponent
-                                    title={'Payment'}
+                            component={() => (
+                                <TemplateStepComponent
+                                    title={'Choose Payment'}
+                                    renderDescription={PaymentDescription}
                                     operationTitle={'Confirm'}
                                 />
                             )}
@@ -29,20 +46,22 @@ class App extends React.Component {
                         <Route
                             exact
                             path={'/confirm'}
-                            render={props => (
-                                <StepComponent
-                                    title={'Confirmation'}
+                            component={() => (
+                                <TemplateStepComponent
+                                    title={'Your order is confirmed'}
                                     operationTitle={'Track Order'}
+                                    renderDescription={ConfirmDescription}
                                 />
                             )}
                         />
                         <Route
                             exact
                             path={'/track'}
-                            render={props => (
-                                <StepComponent
+                            component={() => (
+                                <TemplateStepComponent
                                     title={'Track your order'}
                                     operationTitle={'Continue Shopping'}
+                                    renderDescription={TrackOrderDescription}
                                 />
                             )}
                         />
@@ -59,11 +78,3 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root'),
 );
-
-/*
-* A set of page names mapped to routes
-* Using React Router: HashRouter
-* Simple checkout flow: Open Cart -> Select Payment + Shipping -> Confirmation -> Tracking
-* Route guards
-
- */
