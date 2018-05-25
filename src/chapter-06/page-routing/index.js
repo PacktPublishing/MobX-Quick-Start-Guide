@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Router, Switch } from 'react-router-dom';
-import { tracker } from './history';
 import { Provider } from 'mobx-react';
 import { CheckoutWorkflow } from './CheckoutWorkflow';
 import { Paper } from '@material-ui/core/es/index';
@@ -14,11 +13,13 @@ import {
     TrackOrderDescription,
 } from './shared';
 
+const workflow = new CheckoutWorkflow();
+
 class App extends React.Component {
     render() {
         return (
             <Paper elevation={2} style={{ padding: 20 }}>
-                <Router history={tracker.history}>
+                <Router history={workflow.tracker.history}>
                     <Switch>
                         <Route
                             exact
@@ -73,7 +74,7 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-    <Provider store={new CheckoutWorkflow()}>
+    <Provider store={workflow}>
         <App />
     </Provider>,
     document.getElementById('root'),

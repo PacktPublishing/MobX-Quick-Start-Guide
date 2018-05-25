@@ -11,7 +11,7 @@ import React from 'react';
 import LaptopMac from '@material-ui/icons/LaptopMac';
 import Headset from '@material-ui/icons/Headset';
 import Keyboard from '@material-ui/icons/Keyboard';
-import { tracker } from './history';
+import { HistoryTracker } from './history';
 
 class WorkflowStep {
     workflow = null;
@@ -94,15 +94,16 @@ export class CheckoutWorkflow {
         { name: 'track', stepClass: TrackStep },
     ];
 
+    tracker = new HistoryTracker();
     nextStepPromise = null;
 
     @observable currentStep = null;
     @observable.ref step = null;
 
     constructor() {
-        tracker.startListening(routes);
+        this.tracker.startListening(routes);
 
-        this.currentStep = tracker.page;
+        this.currentStep = this.tracker.page;
 
         autorun(async () => {
             const currentStep = this.currentStep;
@@ -114,12 +115,12 @@ export class CheckoutWorkflow {
             if (stepIndex !== -1) {
                 this.loadStep(stepIndex);
 
-                tracker.page = CheckoutWorkflow.steps[stepIndex].name;
+                this.tracker.page = CheckoutWorkflow.steps[stepIndex].name;
             }
         });
 
         reaction(
-            () => tracker.page,
+            () => this.tracker.page,
             page => {
                 this.currentStep = page;
             },
