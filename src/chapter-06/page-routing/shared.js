@@ -27,9 +27,6 @@ export class TemplateStepComponent extends React.Component {
 
     render() {
         const { title, operationTitle, renderDescription } = this.props;
-        const {
-            step: { loadState, operationState, perform },
-        } = this.props.store;
 
         return (
             <Fragment>
@@ -41,40 +38,48 @@ export class TemplateStepComponent extends React.Component {
                 </Typography>
 
                 <Observer>
-                    {() => (
-                        <OperationStatus
-                            state={loadState}
-                            render={() => (
-                                <div style={{ padding: '2rem 0' }}>
-                                    {renderDescription()}
-                                </div>
-                            )}
-                        />
-                    )}
+                    {() => {
+                        const { step } = this.props.store;
+
+                        return (
+                            <OperationStatus
+                                state={step.loadState}
+                                render={() => (
+                                    <div style={{ padding: '2rem 0' }}>
+                                        {renderDescription()}
+                                    </div>
+                                )}
+                            />
+                        );
+                    }}
                 </Observer>
 
                 <Grid justify={'center'} container>
                     <Observer>
-                        {() => (
-                            <Button
-                                variant={'raised'}
-                                color={'primary'}
-                                disabled={operationState === 'pending'}
-                                onClick={perform}
-                            >
-                                {operationTitle}
-                                {operationState === 'pending' ? (
-                                    <CircularProgress
-                                        variant={'indeterminate'}
-                                        size={20}
-                                        style={{
-                                            color: 'black',
-                                            marginLeft: 10,
-                                        }}
-                                    />
-                                ) : null}
-                            </Button>
-                        )}
+                        {() => {
+                            const { step } = this.props.store;
+
+                            return (
+                                <Button
+                                    variant={'raised'}
+                                    color={'primary'}
+                                    disabled={step.operationState === 'pending'}
+                                    onClick={step.perform}
+                                >
+                                    {operationTitle}
+                                    {step.operationState === 'pending' ? (
+                                        <CircularProgress
+                                            variant={'indeterminate'}
+                                            size={20}
+                                            style={{
+                                                color: 'black',
+                                                marginLeft: 10,
+                                            }}
+                                        />
+                                    ) : null}
+                                </Button>
+                            );
+                        }}
                     </Observer>
                 </Grid>
             </Fragment>

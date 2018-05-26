@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Router, Switch } from 'react-router-dom';
 import { Provider } from 'mobx-react';
+import DevTools from 'mobx-react-devtools';
 import { CheckoutWorkflow } from './CheckoutWorkflow';
 import { Paper } from '@material-ui/core/es/index';
 import { ShowCart } from './show-cart';
@@ -75,7 +76,10 @@ class App extends React.Component {
 
 ReactDOM.render(
     <Provider store={workflow}>
-        <App />
+        <Fragment>
+            <DevTools />
+            <App />
+        </Fragment>
     </Provider>,
     document.getElementById('root'),
 );
