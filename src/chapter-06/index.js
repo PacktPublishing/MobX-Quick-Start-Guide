@@ -1,2 +1,2 @@
-// import './form-validation';
+import './form-validation';
 import './page-routing';

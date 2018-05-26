@@ -1,7 +1,7 @@
 import { store } from './book-store';
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import { Grid, Paper, Typography } from 'material-ui';
+import { Grid, Paper, Typography } from '@material-ui/core';
 import { inject, observer, Provider } from 'mobx-react';
 
 import DevTools from 'mobx-react-devtools';

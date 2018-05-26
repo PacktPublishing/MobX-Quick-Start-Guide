@@ -108,3 +108,7 @@ class UserEnrollmentData {
 }
 
 export const enrollment = new UserEnrollmentData();
+
+configure({
+    enforceActions: false,
+});

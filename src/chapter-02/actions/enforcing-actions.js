@@ -16,3 +16,7 @@ autorun(() => {
 // Modifying outside of an action
 // cart.items.push({ name: 'test', quantity: 1 });
 // cart.modified = new Date();
+
+configure({
+    enforceActions: false,
+});
