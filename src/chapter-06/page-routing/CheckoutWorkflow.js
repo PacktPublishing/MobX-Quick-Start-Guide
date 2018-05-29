@@ -105,7 +105,7 @@ export class CheckoutWorkflow {
 
         this.currentStep = this.tracker.page;
 
-        autorun(async () => {
+        autorun(() => {
             const currentStep = this.currentStep;
 
             const stepIndex = CheckoutWorkflow.steps.findIndex(

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Button, CircularProgress, Grid, Typography } from '@material-ui/core';
-import { inject, observer, Observer } from 'mobx-react';
+import { inject, Observer } from 'mobx-react';
 
 export function OperationStatus({ state, render }) {
     switch (state) {
@@ -17,7 +17,6 @@ export function OperationStatus({ state, render }) {
 }
 
 @inject('store')
-@observer
 export class TemplateStepComponent extends React.Component {
     static defaultProps = {
         title: 'Step Title',

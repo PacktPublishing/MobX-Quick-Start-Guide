@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
 import { Route, Router, Switch } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
@@ -74,12 +73,13 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <Provider store={workflow}>
-        <Fragment>
-            <DevTools />
-            <App />
-        </Fragment>
-    </Provider>,
-    document.getElementById('root'),
-);
+export function PageRoutingExample() {
+    return (
+        <Provider store={workflow}>
+            <Fragment>
+                <DevTools />
+                <App />
+            </Fragment>
+        </Provider>
+    );
+}

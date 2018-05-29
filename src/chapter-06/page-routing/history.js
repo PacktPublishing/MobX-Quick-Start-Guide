@@ -3,11 +3,13 @@ import { observable, action, reaction } from 'mobx';
 
 export class HistoryTracker {
     unsubscribe = null;
-    history = createHashHistory();
+    history;
 
     @observable page = null;
 
     constructor() {
+        this.history = createHashHistory();
+
         reaction(
             () => this.page,
             page => {

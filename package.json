@@ -19,6 +19,7 @@
         "xml-js": "^1.6.4"
     },
     "devDependencies": {
+        "babel-cli": "^6.26.0",
         "custom-react-scripts": "^0.2.2",
         "mobx-react-devtools": "^5.0.1"
     },
