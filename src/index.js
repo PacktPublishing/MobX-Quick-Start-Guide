@@ -7,20 +7,54 @@
 //
 // import './chapter-09';
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { Grid, List, ListItem, Typography } from '@material-ui/core/es/index';
 import { Chapter06 } from './chapter-06';
+import { Chapter03 } from './chapter-03';
+import { Chapter05AsyncAction } from './chapter-05/async-action';
 
+const chapters = [
+    { title: 'Chapter 03', path: '/ch03', component: Chapter03 },
+    {
+        title: 'Chapter 05 (async action)',
+        path: '/ch05/01',
+        component: Chapter05AsyncAction,
+    },
+    { title: 'Chapter 06', path: '/ch06', component: Chapter06 },
+];
 class App extends React.Component {
     render() {
         return (
             <BrowserRouter>
-                <Fragment>
-                    <Route path={'/ch06'} component={Chapter06} />
+                <Grid container>
+                    <Grid item xs={4}>
+                        <List>
+                            {chapters.map(ch => (
+                                <ListItem
+                                    key={ch.path}
+                                    button
+                                    divider
+                                    component={Link}
+                                    to={ch.path}
+                                >
+                                    <Typography>{ch.title}</Typography>
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Grid>
 
-                    <Link to={'/ch06'}>Chapter 06</Link>
-                </Fragment>
+                    <Grid item xs={8}>
+                        {chapters.map(ch => (
+                            <Route
+                                key={ch.path}
+                                path={ch.path}
+                                component={ch.component}
+                            />
+                        ))}
+                    </Grid>
+                </Grid>
             </BrowserRouter>
         );
     }

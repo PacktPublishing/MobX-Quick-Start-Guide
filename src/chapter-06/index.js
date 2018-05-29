@@ -58,11 +58,15 @@ function LinkCard({ path, title, description }) {
                 <Typography component="p">{description}</Typography>
             </CardContent>
             <CardActions>
-                <Link to={path}>
-                    <Button size="large" color="primary" variant={'raised'}>
-                        View
-                    </Button>
-                </Link>
+                <Button
+                    size="large"
+                    color="primary"
+                    variant={'raised'}
+                    component={Link}
+                    to={path}
+                >
+                    View
+                </Button>
             </CardActions>
         </Card>
     );

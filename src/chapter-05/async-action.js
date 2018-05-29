@@ -1,33 +1,36 @@
 import { action, observable, configure } from 'mobx';
+import { asComponent } from '../core/as-component';
 
-configure({ enforceActions: 'strict' });
+export const Chapter05AsyncAction = asComponent(() => {
+    configure({ enforceActions: 'strict' });
 
-class ShoppingCart {
-    @observable asyncState = '';
+    class ShoppingCart {
+        @observable asyncState = '';
 
-    @observable.shallow items = [];
+        @observable.shallow items = [];
 
-    @action.bound
-    async submit() {
-        this.asyncState = 'pending';
-        try {
-            const response = await this.purchaseItems(this.items);
+        @action.bound
+        async submit() {
+            this.asyncState = 'pending';
+            try {
+                const response = await this.purchaseItems(this.items);
 
-            this.asyncState = 'completed';
-        } catch (ex) {
-            console.error(ex);
-            this.asyncState = 'failed';
+                this.asyncState = 'completed';
+            } catch (ex) {
+                console.error(ex);
+                this.asyncState = 'failed';
+            }
+        }
+
+        purchaseItems(items) {
+            /* ... */
+            return Promise.resolve({});
         }
     }
 
-    purchaseItems(items) {
-        /* ... */
-        return Promise.resolve({});
-    }
-}
+    const cart = new ShoppingCart();
 
-const cart = new ShoppingCart();
+    cart.submit();
 
-// cart.submit();
-
-configure({ enforceActions: false });
+    configure({ enforceActions: false });
+});

@@ -50,12 +50,13 @@ function Header() {
     );
 }
 
-ReactDOM.render(
-    <Provider store={store}>
-        <Fragment>
-            <DevTools />
-            <App />
-        </Fragment>
-    </Provider>,
-    document.getElementById('root'),
-);
+export function Chapter03() {
+    return (
+        <Provider store={store}>
+            <Fragment>
+                <DevTools />
+                <App />
+            </Fragment>
+        </Provider>
+    );
+}
