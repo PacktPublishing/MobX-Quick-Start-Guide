@@ -16,6 +16,7 @@ export const Chapter05AsyncAction = asComponent(() => {
                 const response = await this.purchaseItems(this.items);
 
                 this.asyncState = 'completed';
+                console.info('Completed');
             } catch (ex) {
                 console.error(ex);
                 this.asyncState = 'failed';
