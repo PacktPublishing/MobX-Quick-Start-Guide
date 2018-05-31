@@ -28,7 +28,7 @@ class App extends React.Component {
     render() {
         return (
             <BrowserRouter>
-                <Grid container>
+                <Grid container spacing={16}>
                     <Grid item xs={4}>
                         <List>
                             {chapters.map(ch => (

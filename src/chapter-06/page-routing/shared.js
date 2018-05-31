@@ -21,11 +21,11 @@ export class TemplateStepComponent extends React.Component {
     static defaultProps = {
         title: 'Step Title',
         operationTitle: 'Operation',
-        renderDescription: () => 'Some Description',
+        renderDetails: step => 'Some Description',
     };
 
     render() {
-        const { title, operationTitle, renderDescription } = this.props;
+        const { title, operationTitle, renderDetails } = this.props;
 
         return (
             <Fragment>
@@ -45,7 +45,7 @@ export class TemplateStepComponent extends React.Component {
                                 state={step.loadState}
                                 render={() => (
                                     <div style={{ padding: '2rem 0' }}>
-                                        {renderDescription()}
+                                        {renderDetails(step)}
                                     </div>
                                 )}
                             />
@@ -62,7 +62,10 @@ export class TemplateStepComponent extends React.Component {
                                 <Button
                                     variant={'raised'}
                                     color={'primary'}
-                                    disabled={step.operationState === 'pending'}
+                                    disabled={
+                                        step.loadState === 'pending' ||
+                                        step.operationState === 'pending'
+                                    }
                                     onClick={step.perform}
                                 >
                                     {operationTitle}

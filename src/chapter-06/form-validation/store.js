@@ -31,7 +31,7 @@ const rules = {
     },
 };
 
-class UserEnrollmentData {
+export class UserEnrollmentData {
     @observable email = '';
     @observable password = '';
     @observable firstName = '';
@@ -42,18 +42,20 @@ class UserEnrollmentData {
 
     @observable enrollmentStatus = 'none';
 
+    disposeValidation = null;
+
     constructor() {
         this.setupValidation();
     }
 
     setupValidation() {
-        reaction(
+        this.disposeValidation = reaction(
             () => {
                 const { firstName, lastName, password, email } = this;
                 return { firstName, lastName, password, email };
             },
-            () => {
-                this.validateFields();
+            fields => {
+                this.validateFields(fields);
             },
         );
     }
@@ -63,16 +65,17 @@ class UserEnrollmentData {
         this[field] = value;
     }
 
-    validateFields = flow(function*() {
+    getFields() {
+        const { firstName, lastName, password, email } = this;
+        return { firstName, lastName, password, email };
+    }
+
+    validateFields = flow(function*(fields) {
         this.validating = true;
         this.errors = null;
 
-        const { firstName, lastName, password, email } = this;
         try {
-            yield Validate.async(
-                { firstName, lastName, password, email },
-                rules,
-            );
+            yield Validate.async(fields, rules);
 
             this.errors = null;
         } catch (err) {
@@ -86,14 +89,14 @@ class UserEnrollmentData {
         this.enrollmentStatus = 'pending';
         try {
             // Validation
-            yield this.validateFields();
+            const fields = this.getFields();
+            yield this.validateFields(fields);
             if (this.errors) {
-                throw new Error();
+                throw new Error('Invalid fields');
             }
 
             // Enrollment
-            const { firstName, lastName, email, password } = this;
-            yield enrollUser({ firstName, lastName, email, password });
+            yield enrollUser(fields);
 
             this.enrollmentStatus = 'completed';
         } catch (e) {
@@ -105,9 +108,11 @@ class UserEnrollmentData {
     reset() {
         this.enrollmentStatus = 'none';
     }
-}
 
-export const enrollment = new UserEnrollmentData();
+    cleanup() {
+        this.disposeValidation();
+    }
+}
 
 configure({
     enforceActions: false,

@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { Provider } from 'mobx-react';
-import DevTools from 'mobx-react-devtools';
 import { CheckoutWorkflow } from './CheckoutWorkflow';
 import { Paper } from '@material-ui/core/es/index';
 import { ShowCart } from './show-cart';
@@ -27,7 +26,7 @@ class App extends React.Component {
                             component={() => (
                                 <TemplateStepComponent
                                     title={'MobX Shop'}
-                                    renderDescription={ShoppingDescription}
+                                    renderDetails={ShoppingDescription}
                                     operationTitle={'View Cart'}
                                 />
                             )}
@@ -39,7 +38,7 @@ class App extends React.Component {
                             component={() => (
                                 <TemplateStepComponent
                                     title={'Choose Payment'}
-                                    renderDescription={PaymentDescription}
+                                    renderDetails={PaymentDescription}
                                     operationTitle={'Confirm'}
                                 />
                             )}
@@ -51,7 +50,7 @@ class App extends React.Component {
                                 <TemplateStepComponent
                                     title={'Your order is confirmed'}
                                     operationTitle={'Track Order'}
-                                    renderDescription={ConfirmDescription}
+                                    renderDetails={ConfirmDescription}
                                 />
                             )}
                         />
@@ -62,7 +61,7 @@ class App extends React.Component {
                                 <TemplateStepComponent
                                     title={'Track your order'}
                                     operationTitle={'Continue Shopping'}
-                                    renderDescription={TrackOrderDescription}
+                                    renderDetails={TrackOrderDescription}
                                 />
                             )}
                         />
@@ -76,10 +75,7 @@ class App extends React.Component {
 export function PageRoutingExample() {
     return (
         <Provider store={workflow}>
-            <Fragment>
-                <DevTools />
-                <App />
-            </Fragment>
+            <App />
         </Provider>
     );
 }
