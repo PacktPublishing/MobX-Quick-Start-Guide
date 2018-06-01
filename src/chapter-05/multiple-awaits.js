@@ -1,58 +1,61 @@
-import { observable, action, flow, configure } from 'mobx';
+import { action, configure, flow, observable } from 'mobx';
+import { asComponent } from '../core/as-component';
 
-configure({ enforceActions: 'strict' });
+export const MultipleAwaitsExample = asComponent(() => {
+    configure({ enforceActions: 'strict' });
 
-class AuthStore {
-    @observable loginState = '';
+    class AuthStore {
+        @observable loginState = '';
 
-    @action.bound
-    async login(username, password) {
-        this.loginState = 'pending';
+        @action.bound
+        async login(username, password) {
+            this.loginState = 'pending';
 
-        await this.initializeEnvironment();
+            await this.initializeEnvironment();
 
-        this.loginState = 'initialized';
+            this.loginState = 'initialized';
 
-        await this.serverLogin(username, password);
+            await this.serverLogin(username, password);
 
-        this.loginState = 'completed';
+            this.loginState = 'completed';
 
-        await this.sendAnalytics();
+            await this.sendAnalytics();
 
-        this.loginState = 'reported';
+            this.loginState = 'reported';
+        }
+
+        login2 = flow(function*(username, password) {
+            this.loginState = 'pending';
+
+            yield this.initializeEnvironment();
+
+            this.loginState = 'initialized';
+
+            yield this.serverLogin(username, password);
+
+            this.loginState = 'completed';
+
+            yield this.sendAnalytics();
+
+            this.loginState = 'reported';
+
+            yield this.delay(3000);
+            console.log('Login completed and reported');
+        });
+
+        async initializeEnvironment() {}
+
+        async serverLogin(username, password) {}
+
+        async sendAnalytics() {}
+
+        delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
     }
 
-    login2 = flow(function*(username, password) {
-        this.loginState = 'pending';
+    const promise = new AuthStore().login2();
+    // promise.cancel();
 
-        yield this.initializeEnvironment();
-
-        this.loginState = 'initialized';
-
-        yield this.serverLogin(username, password);
-
-        this.loginState = 'completed';
-
-        yield this.sendAnalytics();
-
-        this.loginState = 'reported';
-
-        yield this.delay(3000);
-        console.log('Login completed and reported');
-    });
-
-    async initializeEnvironment() {}
-
-    async serverLogin(username, password) {}
-
-    async sendAnalytics() {}
-
-    delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-}
-
-const promise = new AuthStore().login2();
-// promise.cancel();
-
-configure({ enforceActions: false });
+    configure({ enforceActions: false });
+});

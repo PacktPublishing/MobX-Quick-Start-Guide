@@ -1,25 +1,28 @@
-import { action, computed, decorate, observable } from 'mobx';
+import { action, computed, observable } from 'mobx';
+import { asComponent } from '../core/as-component';
 
-const cart = observable(
-    {
-        items: [],
-        modified: new Date(),
-        get hasItems() {
-            return this.items.length > 0;
+export const ObservableDecorateExample = asComponent(() => {
+    const cart = observable(
+        {
+            items: [],
+            modified: new Date(),
+            get hasItems() {
+                return this.items.length > 0;
+            },
+            addItem(name, quantity) {
+                /* ... */
+            },
+            removeItem(name) {
+                /* ... */
+            },
         },
-        addItem(name, quantity) {
-            /* ... */
-        },
-        removeItem(name) {
-            /* ... */
-        },
-    },
-    {
-        items: observable.shallow,
-        modified: observable,
+        {
+            items: observable.shallow,
+            modified: observable,
 
-        hasItems: computed,
-        addItem: action.bound,
-        removeItem: action.bound,
-    },
-);
+            hasItems: computed,
+            addItem: action.bound,
+            removeItem: action.bound,
+        },
+    );
+});

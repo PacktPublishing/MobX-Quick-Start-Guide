@@ -1,5 +1,5 @@
 import { searchBooks } from './goodreads.service';
-import { observable, action, computed, runInAction } from 'mobx';
+import { action, computed, observable, runInAction } from 'mobx';
 
 // const searchState = observable({
 //     term: '',

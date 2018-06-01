@@ -1,4 +1,4 @@
-import { createAtom, autorun } from 'mobx';
+import { autorun, createAtom } from 'mobx';
 
 class Clock {
     constructor() {

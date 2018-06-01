@@ -1,7 +1,7 @@
-import { action, observable, configure } from 'mobx';
+import { action, configure, observable } from 'mobx';
 import { asComponent } from '../core/as-component';
 
-export const Chapter05AsyncAction = asComponent(() => {
+export const AsyncActionExample = asComponent(() => {
     configure({ enforceActions: 'strict' });
 
     class ShoppingCart {

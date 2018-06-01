@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import { CheckoutWorkflow } from './CheckoutWorkflow';

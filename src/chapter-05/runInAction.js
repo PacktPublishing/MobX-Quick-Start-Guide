@@ -1,38 +1,41 @@
-import { action, observable, configure, runInAction } from 'mobx';
+import { action, configure, observable, runInAction } from 'mobx';
+import { asComponent } from '../core/as-component';
 
-configure({ enforceActions: 'strict' });
+export const RunInActionExample = asComponent(() => {
+    configure({ enforceActions: 'strict' });
 
-class ShoppingCart {
-    @observable asyncState = '';
+    class ShoppingCart {
+        @observable asyncState = '';
 
-    @observable.shallow items = [];
+        @observable.shallow items = [];
 
-    @action
-    async submit() {
-        this.asyncState = 'pending';
-        try {
-            const response = await this.purchaseItems(this.items);
+        @action
+        async submit() {
+            this.asyncState = 'pending';
+            try {
+                const response = await this.purchaseItems(this.items);
 
-            runInAction(() => {
-                this.asyncState = 'completed';
-            });
-        } catch (ex) {
-            console.error(ex);
+                runInAction(() => {
+                    this.asyncState = 'completed';
+                });
+            } catch (ex) {
+                console.error(ex);
 
-            runInAction(() => {
-                this.asyncState = 'failed';
-            });
+                runInAction(() => {
+                    this.asyncState = 'failed';
+                });
+            }
+        }
+
+        purchaseItems(items) {
+            /* ... */
+            return Promise.resolve({});
         }
     }
 
-    purchaseItems(items) {
-        /* ... */
-        return Promise.resolve({});
-    }
-}
+    const cart = new ShoppingCart();
 
-const cart = new ShoppingCart();
+    cart.submit();
 
-cart.submit();
-
-configure({ enforceActions: false });
+    configure({ enforceActions: false });
+});

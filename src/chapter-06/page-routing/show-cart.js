@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    Typography,
-} from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText, Typography, } from '@material-ui/core';
 import { Divider } from '@material-ui/core/es/index';
 import { TemplateStepComponent } from './shared';
 

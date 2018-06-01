@@ -1,13 +1,6 @@
 import React, { Fragment } from 'react';
 import { inject, observer } from 'mobx-react';
-import {
-    Button,
-    Grid,
-    LinearProgress,
-    Paper,
-    TextField,
-    Typography,
-} from '@material-ui/core';
+import { Button, Grid, LinearProgress, Paper, TextField, Typography, } from '@material-ui/core';
 import { CheckCircle } from '@material-ui/icons';
 import { CircularProgress } from '@material-ui/core/es/index';
 

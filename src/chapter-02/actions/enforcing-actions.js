@@ -1,22 +1,25 @@
-import { configure, observable, autorun } from 'mobx';
+import { autorun, configure, observable } from 'mobx';
+import { asComponent } from '../../core/as-component';
 
-configure({
-    enforceActions: true,
-});
+export const EnforcingActionsExample = asComponent(() => {
+    configure({
+        enforceActions: true,
+    });
 
-const cart = observable({
-    items: [],
-    modified: new Date(),
-});
+    const cart = observable({
+        items: [],
+        modified: new Date(),
+    });
 
-autorun(() => {
-    console.log(cart.items, cart.modified);
-});
+    autorun(() => {
+        console.log(cart.items, cart.modified);
+    });
 
-// Modifying outside of an action
-// cart.items.push({ name: 'test', quantity: 1 });
-// cart.modified = new Date();
+    // Modifying outside of an action
+    // cart.items.push({ name: 'test', quantity: 1 });
+    // cart.modified = new Date();
 
-configure({
-    enforceActions: false,
+    configure({
+        enforceActions: false,
+    });
 });

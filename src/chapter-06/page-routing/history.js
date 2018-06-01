@@ -1,5 +1,5 @@
 import createHashHistory from 'history/createHashHistory';
-import { observable, action, reaction } from 'mobx';
+import { action, observable, reaction } from 'mobx';
 
 export class HistoryTracker {
     unsubscribe = null;
