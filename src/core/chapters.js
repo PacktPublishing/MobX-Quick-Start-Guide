@@ -11,8 +11,8 @@ import {
     ReactionExample,
     WhenExample,
     WhenWithPromiseExample,
-} from './chapter-02';
-import { BookSearchExample } from './chapter-03';
+} from '../chapter-02';
+import { BookSearchExample } from '../chapter-03';
 import {
     ComputedDecoratorExample,
     ComputedEqualityExample,
@@ -22,7 +22,7 @@ import {
     ObservableRefExample,
     ObservableStructExample,
     WishlistExample,
-} from './chapter-04';
+} from '../chapter-04';
 import {
     AsyncActionExample,
     AutorunWithOptionsExample,
@@ -33,8 +33,13 @@ import {
     ReactionsExample,
     RunInActionExample,
     WhenToReactExample,
-} from './chapter-05';
-import { FormValidationExample, PageRoutingExample } from './chapter-06';
+} from '../chapter-05';
+import { FormValidationExample, PageRoutingExample } from '../chapter-06';
+import {
+    AtomExample,
+    ObservableValueExample,
+    ShoppingCartExample,
+} from '../chapter-09';
 
 export const chapters = applyPathPrefix([
     {
@@ -234,7 +239,7 @@ export const chapters = applyPathPrefix([
             {
                 title: 'Observables',
                 path: '/',
-                component: () => {},
+                component: () => null,
             },
         ],
     },
@@ -245,7 +250,7 @@ export const chapters = applyPathPrefix([
             {
                 title: 'Utils',
                 path: '/',
-                component: () => {},
+                component: () => null,
             },
         ],
     },
@@ -254,9 +259,19 @@ export const chapters = applyPathPrefix([
         title: 'MobX Internals',
         examples: [
             {
-                title: 'Atom',
-                path: '/',
-                component: () => {},
+                title: 'Atomic Clock',
+                path: '/atom',
+                component: AtomExample,
+            },
+            {
+                title: 'Shopping Cart',
+                path: '/cart',
+                component: ShoppingCartExample,
+            },
+            {
+                title: 'ObservableValue',
+                path: '/observable-value',
+                component: ObservableValueExample,
             },
         ],
     },
