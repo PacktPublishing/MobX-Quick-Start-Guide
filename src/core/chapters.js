@@ -37,6 +37,7 @@ import {
 import { FormValidationExample, PageRoutingExample } from '../chapter-06';
 import {
     AtomExample,
+    InfiniteReactionExample,
     ObservableValueExample,
     ShoppingCartExample,
 } from '../chapter-09';
@@ -272,6 +273,11 @@ export const chapters = applyPathPrefix([
                 title: 'ObservableValue',
                 path: '/observable-value',
                 component: ObservableValueExample,
+            },
+            {
+                title: 'Infinite Reaction',
+                path: '/infinite-reaction',
+                component: InfiniteReactionExample,
             },
         ],
     },
