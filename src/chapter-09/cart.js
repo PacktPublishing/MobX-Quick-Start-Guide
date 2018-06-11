@@ -1,4 +1,12 @@
-import { computed, observable } from 'mobx';
+import {
+    autorun,
+    computed,
+    getDependencyTree,
+    getObserverTree,
+    observable,
+    $mobx,
+    getAtom,
+} from 'mobx';
 import { asComponent } from '../core/as-component';
 
 export const ShoppingCartExample = asComponent(() => {
@@ -38,4 +46,41 @@ export const ShoppingCartExample = asComponent(() => {
 
         /*...*/
     }
+
+    const cart = (window.cart = new ShoppingCart());
+    const disposer = autorun(() => {
+        console.log(cart.description);
+    });
+
+    const descriptionAtom = cart[$mobx].values.get('description');
+    // const descriptionAtom = getAtom(cart, 'description');
+    console.log(getDependencyTree(descriptionAtom));
+    console.log(getObserverTree(descriptionAtom));
+
+    // console.log(getDependencyTree(disposer[$mobx]));
+    console.log(getDependencyTree(getAtom(disposer)));
 });
+
+const depTree = {
+    name: 'Autorun@14',
+    dependencies: [
+        {
+            name: 'ShoppingCart@16.description',
+            dependencies: [
+                { name: 'ShoppingCart@16.items' },
+                { name: 'ShoppingCart@16.items' },
+                {
+                    name: 'ShoppingCart@16.coupons',
+                    dependencies: [
+                        {
+                            name: 'CouponManager@19.validCoupons',
+                            dependencies: [
+                                { name: 'CouponManager@19.coupons' },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+};

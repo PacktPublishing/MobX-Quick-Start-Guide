@@ -12,8 +12,6 @@ class Atom {
 
 export const AtomExample = asComponent(() => {
     class Clock {
-        time = null;
-
         constructor() {
             this.atom = createAtom(
                 'Clock',
@@ -26,7 +24,6 @@ export const AtomExample = asComponent(() => {
             );
 
             this.intervalId = null;
-            this.time = new Date();
         }
 
         startTicking() {
@@ -43,13 +40,12 @@ export const AtomExample = asComponent(() => {
         }
 
         tick() {
-            this.time = new Date();
             this.atom.reportChanged();
         }
 
         get() {
             this.atom.reportObserved();
-            return this.time;
+            return new Date();
         }
     }
 

@@ -11,35 +11,39 @@ import {
 } from '@material-ui/core/es/index';
 import { allExamples, chapters } from './chapters';
 import themeColor from '@material-ui/core/colors/blueGrey';
+import DevTools from 'mobx-react-devtools';
 
 export class MobXBookApp extends React.Component {
     render() {
         return (
-            <BrowserRouter>
-                <Grid container spacing={16}>
-                    <AppBar position="sticky" color="primary">
-                        <Toolbar>
-                            <Typography variant="title" color="inherit">
-                                MobX QuickStart Guide
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
+            <Fragment>
+                <DevTools />
+                <BrowserRouter>
+                    <Grid container spacing={16}>
+                        <AppBar position="sticky" color="primary">
+                            <Toolbar>
+                                <Typography variant="title" color="inherit">
+                                    MobX QuickStart Guide
+                                </Typography>
+                            </Toolbar>
+                        </AppBar>
 
-                    <Grid item xs={4}>
-                        <ChapterList chapters={chapters} />
-                    </Grid>
+                        <Grid item xs={4}>
+                            <ChapterList chapters={chapters} />
+                        </Grid>
 
-                    <Grid item xs={8}>
-                        {allExamples.map(ex => (
-                            <Route
-                                key={ex.path}
-                                path={ex.path}
-                                component={ex.component}
-                            />
-                        ))}
+                        <Grid item xs={8}>
+                            {allExamples.map(ex => (
+                                <Route
+                                    key={ex.path}
+                                    path={ex.path}
+                                    component={ex.component}
+                                />
+                            ))}
+                        </Grid>
                     </Grid>
-                </Grid>
-            </BrowserRouter>
+                </BrowserRouter>
+            </Fragment>
         );
     }
 }
