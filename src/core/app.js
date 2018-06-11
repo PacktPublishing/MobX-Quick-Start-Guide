@@ -1,16 +1,18 @@
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 import React, { Fragment } from 'react';
 import {
     AppBar,
+    Button,
     Grid,
     List,
     ListItem,
     ListSubheader,
     Toolbar,
     Typography,
+    withStyles,
 } from '@material-ui/core/es/index';
 import { allExamples, chapters } from './chapters';
-import themeColor from '@material-ui/core/colors/blueGrey';
+import theme from '@material-ui/core/colors/blueGrey';
 import DevTools from 'mobx-react-devtools';
 
 export class MobXBookApp extends React.Component {
@@ -48,15 +50,12 @@ export class MobXBookApp extends React.Component {
     }
 }
 
-function ChapterList({ chapters }) {
+const ChapterList = ({ chapters }) => {
     return (
         <List dense>
             {chapters.map(({ examples, chapter, title }) => (
-                <Fragment key={chapter}>
-                    <ListSubheader
-                        disableSticky
-                        style={{ borderLeft: `5px solid ${themeColor['400']}` }}
-                    >
+                <div key={chapter} style={{ marginBottom: '2rem' }}>
+                    <ListSubheader disableSticky>
                         <Typography
                             color={'primary'}
                             variant={'title'}
@@ -71,16 +70,19 @@ function ChapterList({ chapters }) {
                     {examples.map(ex => (
                         <ListItem
                             key={ex.path}
-                            button
                             divider
-                            component={Link}
+                            button
+                            component={NavLink}
+                            activeStyle={{
+                                background: theme['A100'],
+                            }}
                             to={ex.path}
                         >
                             <Typography>{ex.title}</Typography>
                         </ListItem>
                     ))}
-                </Fragment>
+                </div>
             ))}
         </List>
     );
-}
+};
