@@ -3,6 +3,8 @@ import React, { Fragment } from 'react';
 import {
     AppBar,
     Button,
+    Card,
+    CardContent,
     Grid,
     List,
     ListItem,
@@ -36,11 +38,7 @@ export class MobXBookApp extends React.Component {
 
                         <Grid item xs={8}>
                             {allExamples.map(ex => (
-                                <Route
-                                    key={ex.path}
-                                    path={ex.path}
-                                    component={ex.component}
-                                />
+                                <ChapterRoute key={ex.path} ex={ex} />
                             ))}
                         </Grid>
                     </Grid>
@@ -89,3 +87,45 @@ const ChapterList = ({ chapters }) => {
         </List>
     );
 };
+
+function ChapterRoute({ ex }) {
+    window.scrollTo(0, 0); // Quick fix to scroll to top
+
+    return (
+        <Route
+            path={ex.path}
+            component={() => (
+                <Fragment>
+                    <Card
+                        style={{
+                            marginBottom: '2rem',
+                            backgroundColor: theme['50'],
+                        }}
+                    >
+                        <CardContent>
+                            {' '}
+                            <Typography
+                                color={'textSecondary'}
+                                variant={'body2'}
+                                align={'left'}
+                            >
+                                {`Chapter 0${ex.chapterIndex}: ${
+                                    ex.chapterTitle
+                                }`}
+                            </Typography>
+                            <Typography
+                                color={'primary'}
+                                variant={'headline'}
+                                align={'left'}
+                            >
+                                {`Example: ${ex.title}`}
+                            </Typography>
+                        </CardContent>{' '}
+                    </Card>
+
+                    <ex.component />
+                </Fragment>
+            )}
+        />
+    );
+}

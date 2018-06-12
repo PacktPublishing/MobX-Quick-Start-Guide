@@ -150,7 +150,7 @@ export const chapters = applyPathPrefix([
                 component: ObservableDecorateExample,
             },
             {
-                title: 'Observabele Ref',
+                title: 'Observable Ref',
                 path: '/observable-ref',
                 component: ObservableRefExample,
             },
@@ -291,7 +291,11 @@ function applyPathPrefix(chapters) {
     return chapters.map(ch => {
         ch.examples.forEach(ex => {
             const exPath = ex.path.replace(/^\/+/, '');
-            ex.path = `/ch0${ch.chapter}/${exPath}`;
+            Object.assign(ex, {
+                path: `/ch0${ch.chapter}/${exPath}`,
+                chapterIndex: ch.chapter,
+                chapterTitle: ch.title,
+            });
         });
 
         return ch;
