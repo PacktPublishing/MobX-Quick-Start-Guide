@@ -12,7 +12,7 @@ import {
     withStyles,
 } from '@material-ui/core/es/index';
 import { allExamples, chapters } from './chapters';
-import theme from '@material-ui/core/colors/blueGrey';
+import theme from '@material-ui/core/colors/indigo';
 import DevTools from 'mobx-react-devtools';
 
 export class MobXBookApp extends React.Component {
@@ -74,11 +74,14 @@ const ChapterList = ({ chapters }) => {
                             button
                             component={NavLink}
                             activeStyle={{
-                                background: theme['A100'],
+                                background: theme['500'],
+                                color: theme['50'],
                             }}
                             to={ex.path}
                         >
-                            <Typography>{ex.title}</Typography>
+                            <Typography color={'inherit'} variant={'body2'}>
+                                {ex.title}
+                            </Typography>
                         </ListItem>
                     ))}
                 </div>
