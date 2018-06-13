@@ -103,7 +103,6 @@ function ChapterRoute({ ex }) {
                         }}
                     >
                         <CardContent>
-                            {' '}
                             <Typography
                                 color={'textSecondary'}
                                 variant={'body2'}
