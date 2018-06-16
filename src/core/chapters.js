@@ -41,7 +41,12 @@ import {
     ObservableValueExample,
     ShoppingCartExample,
 } from '../chapter-09';
-import { ObjectAPIExample, ToJSExample } from '../chapter-07';
+import {
+    ObjectAPIExample,
+    ToJSExample,
+    BecomeObservedExample,
+    LazyTemperatureExample,
+} from '../chapter-07';
 
 export const chapters = applyPathPrefix([
     {
@@ -247,6 +252,16 @@ export const chapters = applyPathPrefix([
                 title: 'toJS()',
                 path: '/to-js',
                 component: ToJSExample,
+            },
+            {
+                title: 'onBecomeObserved() and onBecomeUnobserved()',
+                path: '/become-observed',
+                component: BecomeObservedExample,
+            },
+            {
+                title: 'Lazy Temperature',
+                path: '/lazy-temp',
+                component: LazyTemperatureExample,
             },
         ],
     },
