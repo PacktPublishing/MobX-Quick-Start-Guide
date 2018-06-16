@@ -1,12 +1,4 @@
-import {
-    autorun,
-    computed,
-    getDependencyTree,
-    getObserverTree,
-    observable,
-    $mobx,
-    getAtom,
-} from 'mobx';
+import { $mobx, autorun, computed, getAtom, getDependencyTree, getObserverTree, observable, } from 'mobx';
 import { asComponent } from '../core/as-component';
 
 export const ShoppingCartExample = asComponent(() => {

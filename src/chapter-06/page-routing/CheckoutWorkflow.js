@@ -1,12 +1,4 @@
-import {
-    action,
-    autorun,
-    computed,
-    observable,
-    reaction,
-    runInAction,
-    when,
-} from 'mobx';
+import { action, autorun, computed, observable, reaction, runInAction, when, } from 'mobx';
 import React from 'react';
 import LaptopMac from '@material-ui/icons/LaptopMac';
 import Headset from '@material-ui/icons/Headset';

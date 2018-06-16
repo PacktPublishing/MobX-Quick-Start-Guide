@@ -41,6 +41,7 @@ import {
     ObservableValueExample,
     ShoppingCartExample,
 } from '../chapter-09';
+import { ObjectAPIExample, ToJSExample } from '../chapter-07';
 
 export const chapters = applyPathPrefix([
     {
@@ -238,9 +239,14 @@ export const chapters = applyPathPrefix([
         title: 'Special APIs for special cases',
         examples: [
             {
-                title: 'Observables',
-                path: '/',
-                component: () => null,
+                title: 'Object API',
+                path: '/object-api',
+                component: ObjectAPIExample,
+            },
+            {
+                title: 'toJS()',
+                path: '/to-js',
+                component: ToJSExample,
             },
         ],
     },

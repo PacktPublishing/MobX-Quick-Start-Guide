@@ -1,32 +1,18 @@
 // Observables
-import { CreateObservableExample } from './observables/create-observable';
-import { BoxedObservableExample } from './observables/boxed-observable';
-import { ObservableArrayExample } from './observables/observable-array';
-import { ObservableMapExample } from './observables/observable-map';
-import { ComputedPropertiesExample } from './observables/computed-properties';
-// Actions
-import { ActionDecoratorExample } from './actions/action-decorators';
-import { BasicActionExample } from './actions/basic-action';
-import { EnforcingActionsExample } from './actions/enforcing-actions';
-// Reactions
-import { AutorunExample } from './reactions/autorun';
-import { ReactionExample } from './reactions/reaction';
-import { WhenExample } from './reactions/when';
-import { WhenWithPromiseExample } from './reactions/when-with-promise';
-import { ObserverExample } from './reactions/observer';
+export * from './observables/create-observable';
+export * from './observables/boxed-observable';
+export * from './observables/observable-array';
+export * from './observables/observable-map';
+export * from './observables/computed-properties';
 
-export {
-    CreateObservableExample,
-    BoxedObservableExample,
-    ObservableMapExample,
-    ObservableArrayExample,
-    ComputedPropertiesExample,
-    ActionDecoratorExample,
-    BasicActionExample,
-    EnforcingActionsExample,
-    AutorunExample,
-    ReactionExample,
-    WhenWithPromiseExample,
-    WhenExample,
-    ObserverExample,
-};
+// Actions
+export * from './actions/action-decorators';
+export * from './actions/basic-action';
+export * from './actions/enforcing-actions';
+
+// Reactions
+export * from './reactions/autorun';
+export * from './reactions/reaction';
+export * from './reactions/when';
+export * from './reactions/when-with-promise';
+export * from './reactions/observer';

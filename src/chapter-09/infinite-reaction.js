@@ -1,4 +1,4 @@
-import { reaction, action, observable } from 'mobx';
+import { action, observable, reaction } from 'mobx';
 import { asComponent } from '../core/as-component';
 
 export const InfiniteReactionExample = asComponent(() => {

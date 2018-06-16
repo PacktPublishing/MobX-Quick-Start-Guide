@@ -2,7 +2,6 @@ import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 import React, { Fragment } from 'react';
 import {
     AppBar,
-    Button,
     Card,
     CardContent,
     Grid,
@@ -11,7 +10,6 @@ import {
     ListSubheader,
     Toolbar,
     Typography,
-    withStyles,
 } from '@material-ui/core/es/index';
 import { allExamples, chapters } from './chapters';
 import theme from '@material-ui/core/colors/indigo';
