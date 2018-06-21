@@ -46,6 +46,7 @@ import {
     ToJSExample,
     BecomeObservedExample,
     LazyTemperatureExample,
+    SpyExample,
 } from '../chapter-07';
 
 export const chapters = applyPathPrefix([
@@ -262,6 +263,11 @@ export const chapters = applyPathPrefix([
                 title: 'Lazy Temperature',
                 path: '/lazy-temp',
                 component: LazyTemperatureExample,
+            },
+            {
+                title: 'Start Spying',
+                path: '/spy',
+                component: SpyExample,
             },
         ],
     },

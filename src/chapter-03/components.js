@@ -12,11 +12,14 @@ import {
 } from '@material-ui/core';
 import Search from '@material-ui/icons/Search';
 import { inject, observer } from 'mobx-react';
+import { trace } from 'mobx';
 
 @inject('store')
 @observer
 export class SearchTextField extends React.Component {
     render() {
+        // trace(true);
+
         const { store, onChange } = this.props;
         const { term } = store;
 
