@@ -10,6 +10,8 @@ import { asComponent } from '../core/as-component';
 export const LazyTemperatureExample = asComponent(() => {
     const temperatureService = {
         fetch(location) {
+            console.log('Invoked temperature-fetch');
+
             return new Promise(resolve =>
                 setTimeout(resolve(Math.round(Math.random() * 35)), 200),
             );
@@ -54,8 +56,14 @@ export const LazyTemperatureExample = asComponent(() => {
 
 /*
 Temperature activated
+Temperature in Bengaluru is undefinedºC
+
+Invoked temperature-fetch
 Temperature in Bengaluru is 22ºC
+Invoked temperature-fetch
 Temperature in Bengaluru is 32ºC
+Invoked temperature-fetch
 Temperature in Bengaluru is 4ºC
+
 Temperature deactivated
  */

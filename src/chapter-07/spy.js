@@ -1,11 +1,19 @@
 import { asComponent } from '../core/as-component';
 import { spy } from 'mobx';
+import React from 'react';
+import { Typography } from '@material-ui/core/es/index';
 
-const disposer = spy(event => console.log(event));
+export const SpyExample = asComponent(() => {
+    const disposer = spy(event => console.log(event));
 
-setTimeout(disposer, 5000);
+    setTimeout(disposer, 5000);
 
-export const SpyExample = asComponent(() => {});
+    return (
+        <Typography>
+            Switch to a different example to see some spy activity
+        </Typography>
+    );
+});
 
 /*
 {type: "action", name: "<unnamed action>", object: undefined, arguments: Array(0), spyReportStart: true}
