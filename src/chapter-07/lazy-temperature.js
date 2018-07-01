@@ -22,12 +22,23 @@ export const LazyTemperatureExample = asComponent(() => {
         @observable temperature;
         @observable location;
 
-        interval = null;
+        interval;
+        disposers;
 
         constructor(location) {
             this.location = location;
-            onBecomeObserved(this, 'temperature', this.onActivated);
-            onBecomeUnobserved(this, 'temperature', this.onDeactivated);
+            const disposer1 = onBecomeObserved(
+                this,
+                'temperature',
+                this.onActivated,
+            );
+            const disposer2 = onBecomeUnobserved(
+                this,
+                'temperature',
+                this.onDeactivated,
+            );
+
+            this.disposers = [disposer1, disposer2];
         }
 
         onActivated = () => {
@@ -44,6 +55,11 @@ export const LazyTemperatureExample = asComponent(() => {
         fetchTemperature = flow(function*() {
             this.temperature = yield temperatureService.fetch(this.location);
         });
+
+        cleanup() {
+            this.disposers.forEach(disposer => disposer());
+            this.disposers = undefined;
+        }
     }
 
     const city = new City('Bengaluru');

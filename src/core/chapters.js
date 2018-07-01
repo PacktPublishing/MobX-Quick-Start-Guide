@@ -46,6 +46,8 @@ import {
     ToJSExample,
     BecomeObservedExample,
     LazyTemperatureExample,
+    InterceptExample,
+    ObserveExample,
     SpyExample,
 } from '../chapter-07';
 
@@ -263,6 +265,16 @@ export const chapters = applyPathPrefix([
                 title: 'Lazy Temperature',
                 path: '/lazy-temp',
                 component: LazyTemperatureExample,
+            },
+            {
+                title: 'Intercept',
+                path: '/intercept',
+                component: InterceptExample,
+            },
+            {
+                title: 'Observe',
+                path: '/observe',
+                component: ObserveExample,
             },
             {
                 title: 'Start Spying',
