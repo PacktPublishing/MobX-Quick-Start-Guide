@@ -7,6 +7,7 @@ export const ObserveExample = asComponent(() => {
         shades: [],
     });
 
+    // eslint-disable-next-line
     const disposer = observe(theme, 'color', change => {
         console.log(
             `Observing ${change.type}`,

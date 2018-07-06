@@ -7,6 +7,7 @@ export const InterceptExample = asComponent(() => {
         shades: [],
     });
 
+    // eslint-disable-next-line
     const disposer = intercept(theme, 'color', change => {
         console.log('Intercepting:', change);
 

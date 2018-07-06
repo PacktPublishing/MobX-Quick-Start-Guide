@@ -1,6 +1,5 @@
 import { fromResource } from 'mobx-utils';
 
-import React from 'react';
 import { asComponent } from '../core/as-component';
 
 export const FromResourceExample = asComponent(() => {

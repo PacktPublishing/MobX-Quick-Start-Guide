@@ -50,7 +50,12 @@ import {
     ObserveExample,
     SpyExample,
 } from '../chapter-07';
-import { FromPromiseExample, LazyObservableExample } from '../chapter-08';
+import {
+    CreateViewModelExample,
+    FromPromiseExample,
+    FromResourceExample,
+    LazyObservableExample,
+} from '../chapter-08';
 
 export const chapters = applyPathPrefix([
     {
@@ -297,6 +302,16 @@ export const chapters = applyPathPrefix([
                 title: 'lazyObservable()',
                 path: '/lazy-observable',
                 component: LazyObservableExample,
+            },
+            {
+                title: 'fromResource()',
+                path: '/from-resource',
+                component: FromResourceExample,
+            },
+            {
+                title: 'createViewModel()',
+                path: '/create-viewmodel',
+                component: CreateViewModelExample,
             },
         ],
     },

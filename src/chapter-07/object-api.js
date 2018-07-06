@@ -25,6 +25,8 @@ export const ObjectAPIExample = asComponent(() => {
 
     const firstTodo = new Todo('Write Chapter');
     const todos = observable.array([firstTodo]);
+
+    // eslint-disable-next-line
     const todosMap = observable.map({
         'Write Chapter': firstTodo,
     });
