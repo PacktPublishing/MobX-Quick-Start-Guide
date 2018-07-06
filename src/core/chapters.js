@@ -50,6 +50,7 @@ import {
     ObserveExample,
     SpyExample,
 } from '../chapter-07';
+import { FromPromiseExample, LazyObservableExample } from '../chapter-08';
 
 export const chapters = applyPathPrefix([
     {
@@ -288,9 +289,14 @@ export const chapters = applyPathPrefix([
         title: 'MobX Utils and MobX-State-Tree',
         examples: [
             {
-                title: 'Utils',
-                path: '/',
-                component: () => null,
+                title: 'fromPromise()',
+                path: '/from-promise',
+                component: FromPromiseExample,
+            },
+            {
+                title: 'lazyObservable()',
+                path: '/lazy-observable',
+                component: LazyObservableExample,
             },
         ],
     },

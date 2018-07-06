@@ -1,1 +1,60 @@
-import {} from 'mobx-utils';
+import { fromPromise, PENDING, FULFILLED, REJECTED } from 'mobx-utils';
+import { observer } from 'mobx-react';
+
+import React, { Fragment } from 'react';
+import { CircularProgress, Typography } from '@material-ui/core/es/index';
+
+class Worker {
+    operation = null;
+
+    start() {
+        this.operation = fromPromise(this.performOperation());
+    }
+
+    performOperation() {
+        return new Promise((resolve, reject) => {
+            const timeoutId = setTimeout(() => {
+                clearTimeout(timeoutId);
+                Math.random() > 0.25
+                    ? resolve('200 OK')
+                    : reject(new Error('500 FAIL'));
+            }, 1000);
+        });
+    }
+}
+
+@observer
+export class FromPromiseExample extends React.Component {
+    worker;
+
+    constructor(props) {
+        super(props);
+
+        this.worker = new Worker();
+        this.worker.start();
+    }
+
+    render() {
+        const { operation } = this.worker;
+        return operation.case({
+            [PENDING]: () => (
+                <Fragment>
+                    <CircularProgress size={50} color={'primary'} />
+                    <Typography variant={'title'}>
+                        Operation in Progress
+                    </Typography>
+                </Fragment>
+            ),
+            [FULFILLED]: () => (
+                <Typography variant={'title'} color={'primary'}>
+                    Operation completed with result: {operation.value}
+                </Typography>
+            ),
+            [REJECTED]: () => (
+                <Typography variant={'title'} color={'error'}>
+                    Operation failed with error: {operation.value}
+                </Typography>
+            ),
+        });
+    }
+}
