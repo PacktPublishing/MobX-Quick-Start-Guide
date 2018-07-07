@@ -45,14 +45,14 @@ export class FromPromiseExample extends React.Component {
                     </Typography>
                 </Fragment>
             ),
-            [FULFILLED]: () => (
+            [FULFILLED]: value => (
                 <Typography variant={'title'} color={'primary'}>
-                    Operation completed with result: {operation.value}
+                    Operation completed with result: {value}
                 </Typography>
             ),
-            [REJECTED]: () => (
+            [REJECTED]: error => (
                 <Typography variant={'title'} color={'error'}>
-                    Operation failed with error: {operation.value}
+                    Operation failed with error: {error.message}
                 </Typography>
             ),
         });

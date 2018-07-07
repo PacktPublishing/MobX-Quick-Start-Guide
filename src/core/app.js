@@ -117,7 +117,18 @@ function ChapterRoute({ ex }) {
                             >
                                 {`Example: ${ex.title}`}
                             </Typography>
-                        </CardContent>{' '}
+                        </CardContent>
+
+                        <CardContent>
+                            <Typography
+                                variant={'subheading'}
+                                color={'textSecondary'}
+                            >
+                                <span style={{ fontSize: 36 }}>🤔</span> If you
+                                don't see any visible output here, do check the
+                                console logs in your <strong>DevTools</strong>.
+                            </Typography>
+                        </CardContent>
                     </Card>
 
                     <ex.component />
