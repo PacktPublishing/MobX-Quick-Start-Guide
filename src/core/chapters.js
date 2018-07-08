@@ -55,6 +55,7 @@ import {
     FromPromiseExample,
     FromResourceExample,
     LazyObservableExample,
+    MSTExample,
 } from '../chapter-08';
 
 export const chapters = applyPathPrefix([
@@ -312,6 +313,11 @@ export const chapters = applyPathPrefix([
                 title: 'createViewModel()',
                 path: '/create-viewmodel',
                 component: CreateViewModelExample,
+            },
+            {
+                title: 'mobx-state-tree',
+                path: '/mst',
+                component: MSTExample,
             },
         ],
     },
