@@ -2,7 +2,7 @@ import { types } from 'mobx-state-tree';
 import { autorun } from 'mobx';
 import { asComponent } from '../../core/as-component';
 
-export const MSTExample = asComponent(() => {
+export const TodoExample = asComponent(() => {
     const Todo = types
         .model('Todo', {
             title: types.string,

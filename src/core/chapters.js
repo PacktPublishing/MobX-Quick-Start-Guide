@@ -54,8 +54,13 @@ import {
     CreateViewModelExample,
     FromPromiseExample,
     FromResourceExample,
+    IdentifiersExample,
     LazyObservableExample,
     MSTExample,
+    ReferencesExample,
+    SnapshotExample,
+    TodoExample,
+    UserExample,
 } from '../chapter-08';
 
 export const chapters = applyPathPrefix([
@@ -315,9 +320,29 @@ export const chapters = applyPathPrefix([
                 component: CreateViewModelExample,
             },
             {
-                title: 'mobx-state-tree',
-                path: '/mst',
-                component: MSTExample,
+                title: 'Todo Model (MST)',
+                path: '/todo',
+                component: TodoExample,
+            },
+            {
+                title: 'User model (MST)',
+                path: '/user',
+                component: UserExample,
+            },
+            {
+                title: 'Snapshots (MST)',
+                path: '/snapshots',
+                component: SnapshotExample,
+            },
+            {
+                title: 'References (MST)',
+                path: '/references',
+                component: ReferencesExample,
+            },
+            {
+                title: 'Identifiers (MST)',
+                path: '/identifiers',
+                component: IdentifiersExample,
             },
         ],
     },
