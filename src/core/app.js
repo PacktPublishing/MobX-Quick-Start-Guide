@@ -1,4 +1,4 @@
-import { BrowserRouter, NavLink, Route } from 'react-router-dom';
+import { BrowserRouter, Link, NavLink, Route } from 'react-router-dom';
 import React, { Fragment } from 'react';
 import {
     AppBar,
@@ -24,9 +24,19 @@ export class MobXBookApp extends React.Component {
                     <Grid container spacing={16}>
                         <AppBar position="sticky" color="primary">
                             <Toolbar>
-                                <Typography variant="title" color="inherit">
-                                    MobX QuickStart Guide
-                                </Typography>
+                                <NavLink
+                                    to={'/'}
+                                    activeStyle={{
+                                        textDecoration: 'none',
+                                    }}
+                                >
+                                    <Typography
+                                        variant="title"
+                                        style={{ color: 'white' }}
+                                    >
+                                        MobX QuickStart Guide
+                                    </Typography>
+                                </NavLink>
                             </Toolbar>
                         </AppBar>
 
@@ -35,6 +45,11 @@ export class MobXBookApp extends React.Component {
                         </Grid>
 
                         <Grid item xs={8}>
+                            <Route
+                                component={EntrySplash}
+                                path={'/'}
+                                exact={true}
+                            />
                             {allExamples.map(ex => (
                                 <ChapterRoute key={ex.path} ex={ex} />
                             ))}
@@ -136,4 +151,8 @@ function ChapterRoute({ ex }) {
             )}
         />
     );
+}
+
+function EntrySplash() {
+    return <Typography variant={'display1'}>Essential MobX</Typography>;
 }
