@@ -30,8 +30,7 @@
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
         "predeploy": "npm run build",
-        "deploy": "cd build && now --name packt-mobx"
+        "deploy": "mv ./build/index.html ./build/200.html && surge ./build --domain https://packt-mobx.surge.sh"
     },
-    "proxy": "https://www.goodreads.com",
-    "homepage": "https://github.com/PacktPublishing/Mobx-QuickStart-Guide"
+    "proxy": "https://www.goodreads.com"
 }

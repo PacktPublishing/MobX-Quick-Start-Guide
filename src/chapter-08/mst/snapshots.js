@@ -1,11 +1,9 @@
 import { reaction } from 'mobx';
-import { getSnapshot } from 'mobx-state-tree';
-
-import { types } from 'mobx-state-tree';
+import { getSnapshot, types } from 'mobx-state-tree';
 import { asComponent } from '../../core/as-component';
 
 import React from 'react';
-import { Typography } from '@material-ui/core/es/index';
+import { Typography } from '@material-ui/core';
 
 export const SnapshotExample = asComponent(() => {
     const Todo = types

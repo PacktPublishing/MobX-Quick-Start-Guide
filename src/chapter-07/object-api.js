@@ -1,15 +1,15 @@
 import {
     autorun,
-    observable,
-    set,
+    entries,
     get,
     has,
-    toJS,
-    runInAction,
-    remove,
-    values,
-    entries,
     keys,
+    observable,
+    remove,
+    runInAction,
+    set,
+    toJS,
+    values,
 } from 'mobx';
 import { asComponent } from '../core/as-component';
 

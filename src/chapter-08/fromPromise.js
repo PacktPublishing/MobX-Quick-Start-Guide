@@ -1,8 +1,8 @@
-import { fromPromise, PENDING, FULFILLED, REJECTED } from 'mobx-utils';
+import { fromPromise, FULFILLED, PENDING, REJECTED } from 'mobx-utils';
 import { observer } from 'mobx-react';
 
 import React, { Fragment } from 'react';
-import { CircularProgress, Typography } from '@material-ui/core/es/index';
+import { CircularProgress, Typography } from '@material-ui/core';
 
 class Worker {
     operation = null;

@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, NavLink, Route } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 import React, { Fragment } from 'react';
 import {
     AppBar,
@@ -10,7 +10,7 @@ import {
     ListSubheader,
     Toolbar,
     Typography,
-} from '@material-ui/core/es/index';
+} from '@material-ui/core';
 import { allExamples, chapters } from './chapters';
 import theme from '@material-ui/core/colors/indigo';
 import DevTools from 'mobx-react-devtools';
@@ -102,8 +102,6 @@ const ChapterList = ({ chapters }) => {
 };
 
 function ChapterRoute({ ex }) {
-    window.scrollTo(0, 0); // Quick fix to scroll to top
-
     return (
         <Route
             path={ex.path}

@@ -2,11 +2,7 @@ import { lazyObservable } from 'mobx-utils';
 import { observer } from 'mobx-react';
 
 import React, { Fragment } from 'react';
-import {
-    Button,
-    CircularProgress,
-    Typography,
-} from '@material-ui/core/es/index';
+import { Button, CircularProgress, Typography } from '@material-ui/core';
 
 class ExpensiveWorker {
     operation = null;

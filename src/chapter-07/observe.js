@@ -1,4 +1,4 @@
-import { observe, observable } from 'mobx';
+import { observable, observe } from 'mobx';
 import { asComponent } from '../core/as-component';
 
 export const ObserveExample = asComponent(() => {

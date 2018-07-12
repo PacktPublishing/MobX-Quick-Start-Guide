@@ -1,8 +1,8 @@
 import {
+    autorun,
+    observable,
     onBecomeObserved,
     onBecomeUnobserved,
-    observable,
-    autorun,
 } from 'mobx';
 import { asComponent } from '../core/as-component';
 

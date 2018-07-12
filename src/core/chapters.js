@@ -42,13 +42,13 @@ import {
     ShoppingCartExample,
 } from '../chapter-09';
 import {
-    ObjectAPIExample,
-    ToJSExample,
     BecomeObservedExample,
-    LazyTemperatureExample,
     InterceptExample,
+    LazyTemperatureExample,
+    ObjectAPIExample,
     ObserveExample,
     SpyExample,
+    ToJSExample,
 } from '../chapter-07';
 import {
     CreateViewModelExample,

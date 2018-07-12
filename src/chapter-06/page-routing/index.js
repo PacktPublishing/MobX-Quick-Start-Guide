@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import { CheckoutWorkflow } from './CheckoutWorkflow';
-import { Paper } from '@material-ui/core/es/index';
+import { Paper } from '@material-ui/core';
 import { ShowCart } from './show-cart';
 import {
     ConfirmDescription,

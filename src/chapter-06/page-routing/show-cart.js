@@ -6,7 +6,7 @@ import {
     ListItemText,
     Typography,
 } from '@material-ui/core';
-import { Divider } from '@material-ui/core/es/index';
+import { Divider } from '@material-ui/core';
 import { TemplateStepComponent } from './shared';
 
 export class ShowCart extends React.Component {

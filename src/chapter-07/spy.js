@@ -1,7 +1,7 @@
 import { asComponent } from '../core/as-component';
 import { spy } from 'mobx';
 import React from 'react';
-import { Typography } from '@material-ui/core/es/index';
+import { Typography } from '@material-ui/core';
 
 export const SpyExample = asComponent(() => {
     const disposer = spy(event => console.log(event));

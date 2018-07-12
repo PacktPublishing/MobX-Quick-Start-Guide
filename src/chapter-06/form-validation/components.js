@@ -9,7 +9,7 @@ import {
     Typography,
 } from '@material-ui/core';
 import { CheckCircle } from '@material-ui/icons';
-import { CircularProgress } from '@material-ui/core/es/index';
+import { CircularProgress } from '@material-ui/core';
 
 @inject(stores => ({ store: stores.store }))
 class UserEnrollmentForm extends React.Component {
