@@ -23,6 +23,7 @@
     "devDependencies": {
         "babel-cli": "^6.26.0",
         "custom-react-scripts": "^0.2.2",
+        "gh-pages": "^1.2.0",
         "mobx-react-devtools": "^5.0.1"
     },
     "scripts": {

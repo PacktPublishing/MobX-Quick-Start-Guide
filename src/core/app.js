@@ -154,5 +154,26 @@ function ChapterRoute({ ex }) {
 }
 
 function EntrySplash() {
-    return <Typography variant={'display1'}>Essential MobX</Typography>;
+    return (
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
+        >
+            <img src={require('./mobx.png')} width={256} />
+            <Typography variant={'display3'}>Essential MobX</Typography>
+
+            <Typography variant={'headline'} style={{ marginTop: '2rem' }}>
+                This is a companion web-app that includes all the executable
+                examples in the book.
+            </Typography>
+
+            <Typography variant={'caption'} style={{ marginTop: '3rem' }}>
+                Built using React, React Router, Material-UI and{' '}
+                <strong>MobX</strong> 😇
+            </Typography>
+        </div>
+    );
 }
