@@ -3,10 +3,12 @@ import convert from 'xml-js';
 import { isArrayLike } from 'mobx';
 
 const APIKEY = process.env.REACT_APP_GOODREADS_APIKEY;
+const API_ENDPOINT =
+    'https://cors-anywhere.herokuapp.com/https://www.goodreads.com';
 
 export async function searchBooks(term) {
     const json = await getJSONResponse(
-        `/search/index.xml?key=${APIKEY}&q=${term}`,
+        `${API_ENDPOINT}/search/index.xml?key=${APIKEY}&q=${term}`,
     );
 
     const { 'total-results': total } = json.search;
@@ -14,7 +16,9 @@ export async function searchBooks(term) {
 
     const results = isArrayLike(innerResults)
         ? innerResults.map(asBook)
-        : innerResults ? [asBook(innerResults)] : [];
+        : innerResults
+            ? [asBook(innerResults)]
+            : [];
 
     return {
         total: parseInt(total._text, 10),
@@ -55,7 +59,9 @@ function asBook(json) {
 }
 
 async function getJSONResponse(url) {
-    const results = await fetch(url);
+    const results = await fetch(url, {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+    });
     const data = await results.text();
 
     const json = convert.xml2js(data, {

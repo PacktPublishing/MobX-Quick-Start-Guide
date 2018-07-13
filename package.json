@@ -22,7 +22,8 @@
     "devDependencies": {
         "babel-cli": "^6.26.0",
         "custom-react-scripts": "^0.2.2",
-        "mobx-react-devtools": "^5.0.1"
+        "mobx-react-devtools": "^5.0.1",
+        "surge": "^0.20.1"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -31,6 +32,5 @@
         "eject": "react-scripts eject",
         "predeploy": "npm run build",
         "deploy": "mv ./build/index.html ./build/200.html && surge ./build --domain https://packt-mobx.surge.sh"
-    },
-    "proxy": "https://www.goodreads.com"
+    }
 }

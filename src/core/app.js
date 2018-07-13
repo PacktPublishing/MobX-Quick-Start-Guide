@@ -10,6 +10,7 @@ import {
     ListSubheader,
     Toolbar,
     Typography,
+    Button,
 } from '@material-ui/core';
 import { allExamples, chapters } from './chapters';
 import theme from '@material-ui/core/colors/indigo';
@@ -32,11 +33,34 @@ export class MobXBookApp extends React.Component {
                                 >
                                     <Typography
                                         variant="title"
-                                        style={{ color: 'white' }}
+                                        style={{
+                                            color: 'white',
+                                            justifyContent: 'center',
+                                        }}
                                     >
+                                        <img
+                                            src={require('./packt.jpeg')}
+                                            height={24}
+                                            style={{ marginRight: 8 }}
+                                        />
                                         MobX QuickStart Guide
                                     </Typography>
                                 </NavLink>
+
+                                <Button
+                                    style={{ color: 'white' }}
+                                    href={
+                                        'https://github.com/PacktPublishing/Mobx-QuickStart-Guide'
+                                    }
+                                    size={'small'}
+                                >
+                                    <img
+                                        src={require('./github-256.png')}
+                                        height={24}
+                                        style={{ margin: '0 0.5rem' }}
+                                    />
+                                    Source Code
+                                </Button>
                             </Toolbar>
                         </AppBar>
 
@@ -161,7 +185,7 @@ function EntrySplash() {
             }}
         >
             <img src={require('./mobx.png')} width={256} />
-            <Typography variant={'display3'}>Essential MobX</Typography>
+            <Typography variant={'display3'}>MobX QuickStart Guide</Typography>
 
             <Typography variant={'headline'} style={{ marginTop: '2rem' }}>
                 This is a companion web-app that includes all the executable
