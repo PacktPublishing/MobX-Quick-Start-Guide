@@ -1,5 +1,7 @@
 # MobX-QuickStart-Guide
 
+<img src="./src/core/mobx.png" height="64">
+
 MobX QuickStart Guide, published by Packt
 
 ## See it live
