@@ -23,46 +23,7 @@ export class MobXBookApp extends React.Component {
                 <DevTools />
                 <BrowserRouter>
                     <Grid container spacing={16}>
-                        <AppBar position="sticky" color="primary">
-                            <Toolbar>
-                                <NavLink
-                                    to={'/'}
-                                    activeStyle={{
-                                        textDecoration: 'none',
-                                    }}
-                                >
-                                    <Typography
-                                        variant="title"
-                                        style={{
-                                            color: 'white',
-                                            justifyContent: 'center',
-                                        }}
-                                    >
-                                        <img
-                                            src={require('./packt.jpeg')}
-                                            height={24}
-                                            style={{ marginRight: 8 }}
-                                        />
-                                        MobX QuickStart Guide
-                                    </Typography>
-                                </NavLink>
-
-                                <Button
-                                    style={{ color: 'white' }}
-                                    href={
-                                        'https://github.com/PacktPublishing/Mobx-QuickStart-Guide'
-                                    }
-                                    size={'small'}
-                                >
-                                    <img
-                                        src={require('./github-256.png')}
-                                        height={24}
-                                        style={{ margin: '0 0.5rem' }}
-                                    />
-                                    Source Code
-                                </Button>
-                            </Toolbar>
-                        </AppBar>
+                        <BookAppBar />
 
                         <Grid item xs={4}>
                             <ChapterList chapters={chapters} />
@@ -83,6 +44,54 @@ export class MobXBookApp extends React.Component {
             </Fragment>
         );
     }
+}
+
+function BookAppBar() {
+    return (
+        <AppBar position="sticky" color="primary">
+            <Toolbar>
+                <NavLink
+                    to={'/'}
+                    activeStyle={{
+                        textDecoration: 'none',
+                    }}
+                >
+                    <Typography
+                        variant="title"
+                        style={{
+                            color: 'white',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <img
+                            src={require('./packt.jpeg')}
+                            height={24}
+                            style={{ marginRight: 8 }}
+                        />
+                        MobX QuickStart Guide
+                    </Typography>
+                </NavLink>
+
+                <Button
+                    style={{
+                        color: 'white',
+                        margin: '0 1rem',
+                    }}
+                    href={
+                        'https://github.com/PacktPublishing/Mobx-QuickStart-Guide'
+                    }
+                    size={'small'}
+                >
+                    <img
+                        src={require('./github-256.png')}
+                        height={24}
+                        style={{ marginRight: 10 }}
+                    />
+                    Source Code
+                </Button>
+            </Toolbar>
+        </AppBar>
+    );
 }
 
 const ChapterList = ({ chapters }) => {
