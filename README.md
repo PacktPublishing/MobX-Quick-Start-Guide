@@ -2,7 +2,8 @@
 
 <img src="./src/core/mobx.png" height="256">
 
-MobX QuickStart Guide, published by Packt
+MobX QuickStart Guide, published by Packt. This is the companion site containing the source-code
+for the book.
 
 ## See it live
 
