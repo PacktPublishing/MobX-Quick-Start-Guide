@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, toJS } from 'mobx';
 import { asComponent } from '../../core/as-component';
 
 export const ObservableArrayExample = asComponent(() => {
@@ -20,6 +20,6 @@ export const ObservableArrayExample = asComponent(() => {
     console.log(items.length); // Prints: 3
 
     // Plain Array
-    const plainArray = items.toJS();
+    const plainArray = toJS(items);
     console.log(plainArray);
 });
