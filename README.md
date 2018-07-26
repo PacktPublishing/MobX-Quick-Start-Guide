@@ -7,6 +7,8 @@ for the book.
 
 ## See it live
 
+<img src="./src/core/app.png" height="400">
+
 Go to [https://packt-mobx.surge.sh](https://packt-mobx.surge.sh) to see the app running live. Source maps have been included so you can browse
 the source for the examples in DevTools.
 
