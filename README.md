@@ -10,6 +10,10 @@ for the book.
 Go to [https://packt-mobx.surge.sh](https://packt-mobx.surge.sh) to see the app running live. Source maps have been included so you can browse
 the source for the examples in DevTools.
 
+#### Code in Action
+The [Code in Action](https://www.youtube.com/watch?v=16QQLes3LH0&list=PLTgRMOcmRb3MRIt2_4D8KWkunuJsEnCY5) videos 
+also show you what these examples look like.
+
 ## How to run the examples
 
 -   Install Node
