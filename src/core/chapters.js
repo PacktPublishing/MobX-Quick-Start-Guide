@@ -11,8 +11,8 @@ import {
     ReactionExample,
     WhenExample,
     WhenWithPromiseExample,
-} from '../chapter-02';
-import { BookSearchExample } from '../chapter-03';
+} from '../Chapter02';
+import { BookSearchExample } from '../Chapter03';
 import {
     ComputedDecoratorExample,
     ComputedEqualityExample,
@@ -22,7 +22,7 @@ import {
     ObservableRefExample,
     ObservableStructExample,
     WishlistExample,
-} from '../chapter-04';
+} from '../Chapter04';
 import {
     AsyncActionExample,
     AutorunWithOptionsExample,
@@ -33,14 +33,14 @@ import {
     ReactionsExample,
     RunInActionExample,
     WhenToReactExample,
-} from '../chapter-05';
-import { FormValidationExample, PageRoutingExample } from '../chapter-06';
+} from '../Chapter05';
+import { FormValidationExample, PageRoutingExample } from '../Chapter06';
 import {
     AtomExample,
     InfiniteReactionExample,
     ObservableValueExample,
     ShoppingCartExample,
-} from '../chapter-09';
+} from '../Chapter09';
 import {
     BecomeObservedExample,
     InterceptExample,
@@ -49,7 +49,7 @@ import {
     ObserveExample,
     SpyExample,
     ToJSExample,
-} from '../chapter-07';
+} from '../Chapter07';
 import {
     CreateViewModelExample,
     FromPromiseExample,
@@ -61,7 +61,7 @@ import {
     SnapshotExample,
     TodoExample,
     UserExample,
-} from '../chapter-08';
+} from '../Chapter08';
 
 export const chapters = applyPathPrefix([
     {
