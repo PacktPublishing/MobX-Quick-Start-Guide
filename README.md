@@ -64,8 +64,7 @@ Click on the following link to see the Code in Action:
 has been building frontend applications since 2001 and has used a variety of tools, technologies, and platforms, from Java Swing, WPF with .Net/C#, Cocoa on macOS and iOS, to the web platform with frameworks like React and Angular. He has been working with React since 2013 and MobX since 2016. He is a colead of the Interactive Practice at Publicis.Sapient, where he builds large financial apps for web and mobile platforms.
 
 Earlier, he was a Microsoft MVP for client application development (2008-2011), a published author of [WPF Control
-Development Unleashed (Addison-Wesley)](https://www.amazon
-.com/WPF-Control-Development-Unleashed-Experiences/dp/0672330334). He created [QuickLens](http://quicklensapp.com), a
+Development Unleashed (Addison-Wesley)](https://www.amazon.com/WPF-Control-Development-Unleashed-Experiences/dp/0672330334). He created [QuickLens](http://quicklensapp.com), a
 Mac App for UI designers/developers, and authored several articles and video courses on Tuts+.
 
 Pavan is a [Google Developer Expert (GDE)](https://developers.google.com/experts/people/pavan-podila) for web
