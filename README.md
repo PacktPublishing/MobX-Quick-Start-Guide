@@ -79,13 +79,6 @@ Intrigued by several (transparent) reactive programming libraries, he researched
 He's very active in the open source software community, and he authored MobX, Immer, and several small libraries, and
 coauthored MobX-State-Tree.
 
-# MobX-QuickStart-Guide
-
-<img src="./src/core/mobx.png" height="256">
-
-[MobX QuickStart Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide), published by Packt. This is the companion site containing the source-code
-for the book.
-
 ## See it live
 
 <a href="https://packt-mobx.surge.sh"><img src="./src/core/app.png" height="400"></a>
