@@ -2,12 +2,14 @@ import { action, configure, observable, runInAction } from 'mobx';
 import { asComponent } from '../core/as-component';
 
 export const RunInActionExample = asComponent(() => {
-    configure({ enforceActions: 'strict' });
+    configure({ enforceActions: 'always' });
 
     class ShoppingCart {
-        @observable asyncState = '';
+        @observable
+        asyncState = '';
 
-        @observable.shallow items = [];
+        @observable.shallow
+        items = [];
 
         @action
         async submit() {
@@ -37,5 +39,5 @@ export const RunInActionExample = asComponent(() => {
 
     cart.submit();
 
-    configure({ enforceActions: false });
+    configure({ enforceActions: 'never' });
 });

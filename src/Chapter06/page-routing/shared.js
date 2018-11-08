@@ -17,7 +17,7 @@ export function OperationStatus({ state, render }) {
 }
 
 @inject('store')
-export class TemplateStepComponent extends React.Component {
+class TemplateStepComponent extends React.Component {
     static defaultProps = {
         title: 'Step Title',
         operationTitle: 'Operation',
@@ -132,3 +132,5 @@ export function TrackOrderDescription() {
         </Fragment>
     );
 }
+
+export { TemplateStepComponent };

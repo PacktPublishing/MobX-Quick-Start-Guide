@@ -2,7 +2,7 @@ import { action, configure, flow, observable } from 'mobx';
 import { asComponent } from '../core/as-component';
 
 export const MultipleAwaitsExample = asComponent(() => {
-    configure({ enforceActions: 'strict' });
+    configure({ enforceActions: 'always' });
 
     class AuthStore {
         @observable loginState = '';
@@ -57,5 +57,5 @@ export const MultipleAwaitsExample = asComponent(() => {
     const promise = new AuthStore().login2();
     // promise.cancel();
 
-    configure({ enforceActions: false });
+    configure({ enforceActions: 'never' });
 });

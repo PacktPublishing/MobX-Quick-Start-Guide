@@ -3,7 +3,7 @@ import { asComponent } from '../../core/as-component';
 
 export const EnforcingActionsExample = asComponent(() => {
     configure({
-        enforceActions: true,
+        enforceActions: 'observed',
     });
 
     const cart = observable({
@@ -20,6 +20,6 @@ export const EnforcingActionsExample = asComponent(() => {
     // cart.modified = new Date();
 
     configure({
-        enforceActions: false,
+        enforceActions: 'never',
     });
 });

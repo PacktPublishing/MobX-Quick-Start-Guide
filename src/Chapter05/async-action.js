@@ -2,7 +2,7 @@ import { action, configure, observable } from 'mobx';
 import { asComponent } from '../core/as-component';
 
 export const AsyncActionExample = asComponent(() => {
-    configure({ enforceActions: 'strict' });
+    configure({ enforceActions: 'always' });
 
     class ShoppingCart {
         @observable asyncState = '';
@@ -33,5 +33,5 @@ export const AsyncActionExample = asComponent(() => {
 
     cart.submit();
 
-    configure({ enforceActions: false });
+    configure({ enforceActions: 'never' });
 });

@@ -166,7 +166,7 @@ class EnrollmentComplete extends React.Component {
 
 @inject('store')
 @observer
-export class App extends React.Component {
+class App extends React.Component {
     render() {
         const { store } = this.props;
         return store.enrollmentStatus === 'completed' ? (
@@ -176,3 +176,5 @@ export class App extends React.Component {
         );
     }
 }
+
+export { App };

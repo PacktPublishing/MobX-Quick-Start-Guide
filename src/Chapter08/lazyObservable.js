@@ -26,7 +26,7 @@ class ExpensiveWorker {
 }
 
 @observer
-export class LazyObservableExample extends React.Component {
+class LazyObservableExample extends React.Component {
     worker;
 
     constructor(props) {
@@ -65,3 +65,5 @@ export class LazyObservableExample extends React.Component {
         );
     }
 }
+
+export { LazyObservableExample };

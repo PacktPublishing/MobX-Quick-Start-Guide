@@ -24,7 +24,7 @@ class Worker {
 }
 
 @observer
-export class FromPromiseExample extends React.Component {
+class FromPromiseExample extends React.Component {
     worker;
 
     constructor(props) {
@@ -58,3 +58,5 @@ export class FromPromiseExample extends React.Component {
         });
     }
 }
+
+export { FromPromiseExample };

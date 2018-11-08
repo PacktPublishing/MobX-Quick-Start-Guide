@@ -1,36 +1,44 @@
 {
-    "name": "mobx-quickstart",
-    "version": "1.0.0",
-    "description": "Code for the book: MobX QuickStart Guide",
-    "keywords": [],
-    "main": "src/index.js",
-    "dependencies": {
-        "@material-ui/core": "^1.3.1",
-        "@material-ui/icons": "^1.1.0",
-        "history": "^4.7.2",
-        "mobx": "^5.0.3",
-        "mobx-react": "^5.2.3",
-        "mobx-state-tree": "^2.2.0",
-        "mobx-utils": "^5.0.0",
-        "react": "^16.4.1",
-        "react-dom": "^16.4.1",
-        "react-router-dom": "^4.3.1",
-        "validate.js": "^0.12.0",
-        "whatwg-fetch": "^2.0.4",
-        "xml-js": "^1.6.7"
-    },
-    "devDependencies": {
-        "babel-cli": "^6.26.0",
-        "custom-react-scripts": "^0.2.2",
-        "mobx-react-devtools": "^5.0.1",
-        "surge": "^0.20.1"
-    },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test --env=jsdom",
-        "eject": "react-scripts eject",
-        "predeploy": "npm run build",
-        "deploy": "mv ./build/index.html ./build/200.html && surge ./build --domain https://packt-mobx.surge.sh"
-    }
+  "name": "mobx-quickstart",
+  "version": "1.0.0",
+  "description": "Code for the book: MobX QuickStart Guide",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@material-ui/core": "^1.5.1",
+    "@material-ui/icons": "^1.1.1",
+    "history": "^4.7.2",
+    "mobx": "^5.6.0",
+    "mobx-react": "^5.3.6",
+    "mobx-state-tree": "^2.2.0",
+    "mobx-utils": "^5.0.4",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-router-dom": "^4.3.1",
+    "validate.js": "^0.12.0",
+    "whatwg-fetch": "^2.0.4",
+    "xml-js": "^1.6.8"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "customize-cra": "^0.2.3",
+    "mobx-react-devtools": "^5.0.1",
+    "react-app-rewired": "^1.6.2",
+    "react-scripts": "^2.1.1",
+    "surge": "^0.20.1"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-app-rewired eject",
+    "predeploy": "npm run build",
+    "deploy": "mv ./build/index.html ./build/200.html && surge ./build --domain https://packt-mobx.surge.sh"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

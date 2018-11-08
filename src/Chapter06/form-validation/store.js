@@ -2,7 +2,7 @@ import { action, configure, flow, observable, reaction } from 'mobx';
 import Validate from 'validate.js';
 import { checkUser, enrollUser } from './service';
 
-configure({ enforceActions: 'strict' });
+configure({ enforceActions: 'always' });
 
 Validate.validators.checkUser = async function(value) {
     try {
@@ -115,5 +115,5 @@ export class UserEnrollmentData {
 }
 
 configure({
-    enforceActions: false,
+    enforceActions: 'never',
 });
